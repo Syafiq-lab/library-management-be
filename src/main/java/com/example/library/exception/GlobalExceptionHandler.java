@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.AccessDeniedException;
 
 /**
  * Global exception handler for REST controllers.
@@ -13,6 +14,25 @@ import lombok.extern.slf4j.Slf4j;
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
+
+	/**
+	 * Handles AccessDeniedException thrown by the application.
+	 *
+	 * @param ex      AccessDeniedException instance
+	 * @param request WebRequest instance
+	 * @return ResponseEntity with error details
+	 */
+	@ExceptionHandler(AccessDeniedException.class)
+	public ResponseEntity<ApiResponse<Object>> handleAccessDeniedException(
+			AccessDeniedException ex, WebRequest request) {
+		log.error("AccessDeniedException: {}", ex.getMessage());
+		ApiResponse<Object> response = ApiResponse.builder()
+				.status(HttpStatus.FORBIDDEN.value())
+				.message("Access is denied")
+				.timestamp(LocalDateTime.now())
+				.build();
+		return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+	}
 
 	/**
 	 * Handles CustomException thrown by the application.

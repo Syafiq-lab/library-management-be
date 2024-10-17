@@ -11,6 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Implementation of BorrowerService.
  */
@@ -36,5 +39,21 @@ public class BorrowerServiceImpl implements BorrowerService {
 		log.info("Retrieved borrower '{}'", borrower.getName());
 
 		return borrowerMapper.toResponse(borrower);
+	}
+
+	/**
+	 * Retrieves all borrowers.
+	 *
+	 * @return List of BorrowerResponse with borrower information
+	 */
+	@Override
+	public List<BorrowerResponse> getAllBorrowers() {
+		List<BorrowerEntity> borrowers = borrowerRepository.findAll();
+
+		log.info("Retrieved {} borrowers", borrowers.size());
+
+		return borrowers.stream()
+				.map(borrowerMapper::toResponse)
+				.collect(Collectors.toList());
 	}
 }

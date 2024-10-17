@@ -35,15 +35,11 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response,
 					   AccessDeniedException accessDeniedException) throws IOException {
-
-		// Log the exception
 		System.out.println("CustomAccessDeniedHandler: " + accessDeniedException.getMessage());
 
-		// Set the response status and content type
 		response.setStatus(HttpStatus.FORBIDDEN.value());
 		response.setContentType("application/json");
 
-		// Create an ApiResponse
 		ApiResponse<Object> apiResponse = ApiResponse.<Object>builder()
 				.status(HttpStatus.FORBIDDEN.value())
 				.message("You do not have permission to access this resource.")
@@ -51,7 +47,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 				.timestamp(LocalDateTime.now())
 				.build();
 
-		// Write the ApiResponse as JSON
 		response.getWriter().write(objectMapper.writeValueAsString(apiResponse));
 	}
+
 }

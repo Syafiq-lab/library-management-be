@@ -22,10 +22,6 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
 	private final ObjectMapper mapper;
 
-	public JwtAuthenticationEntryPoint() {
-		this.mapper = new ObjectMapper();
-	}
-
 	/**
 	 * Handles unauthorized requests.
 	 *
