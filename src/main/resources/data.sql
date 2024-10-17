@@ -5,9 +5,9 @@ INSERT INTO roles (name) VALUES ('ROLE_USER'), ('ROLE_ADMIN');
 
 -- Insert users with hashed passwords (passwords are 'password123' hashed with BCrypt)
 INSERT INTO users (username, password) VALUES
-                                           ('admin', '$2a$12$E9h5S/9Y2/1vH6M8v9QOHe7VhR3Jk2C6fZ7hXdu1nE8xXWJ1FqU4S'), -- admin123
-                                           ('johndoe', '$2a$12$E6sQ1hObF6POeKx/9NlZae4q0dXx0o7/SNClLLAM1OkzP64O.5E1y'), -- password123
-                                           ('janedoe', '$2a$12$E6sQ1hObF6POeKx/9NlZae4q0dXx0o7/SNClLLAM1OkzP64O.5E1y'); -- password123
+                                           ('admin', '$2a$12$K6pU24Vmg4VglmCIVP3o4uznJHaCanLWGdixIykQIxGY59ZiZD5Z.'), -- admin123
+                                           ('johndoe', '$2a$12$.MdTeXhsy6H/V4Qtqj4EMe0FaNRtmzEJQxaBj3kojaLQQ1v11SUea'), -- password123
+                                           ('janedoe', '$2a$12$.MdTeXhsy6H/V4Qtqj4EMe0FaNRtmzEJQxaBj3kojaLQQ1v11SUea'); -- password123
 
 -- Assign roles to users
 -- Assign ROLE_ADMIN to admin user
