@@ -4,37 +4,35 @@ import com.mb.transactionbackend.dto.BorrowerRegistrationRequest;
 import com.mb.transactionbackend.model.Borrower;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mapstruct.factory.Mappers;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(MockitoExtension.class)
 class BorrowerMapperTest {
 
     private BorrowerMapper borrowerMapper;
 
     @BeforeEach
     void setUp() {
-        borrowerMapper = new BorrowerMapperImpl();
+        borrowerMapper = Mappers.getMapper(BorrowerMapper.class);
     }
 
     @Test
-    void toEntity_ShouldMapCorrectly() {
-        // Given
-        BorrowerRegistrationRequest request = new BorrowerRegistrationRequest();
-        request.setBorrowerId("BOR001");
-        request.setName("John Doe");
-        request.setEmail("john.doe@example.com");
+    void toEntity_ShouldMapAllFieldsAndIgnoreId() {
+        // Given: a record instance (using its canonical constructor)
+        BorrowerRegistrationRequest request = new BorrowerRegistrationRequest(
+                "BOR001",
+                "John Doe",
+                "john.doe@example.com"
+        );
 
-        // When
         Borrower result = borrowerMapper.toEntity(request);
 
-        // Then
         assertNotNull(result);
-        assertEquals("BOR001", result.getBorrowerId());
-        assertEquals("John Doe", result.getName());
-        assertEquals("john.doe@example.com", result.getEmail());
+        assertEquals(request.borrowerId(), result.getBorrowerId());
+        assertEquals(request.name(),       result.getName());
+        assertEquals(request.email(),      result.getEmail());
+
         assertNull(result.getId());
     }
 }

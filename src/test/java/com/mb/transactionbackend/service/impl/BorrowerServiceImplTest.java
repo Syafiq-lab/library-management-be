@@ -1,25 +1,21 @@
 package com.mb.transactionbackend.service.impl;
 
 import com.mb.transactionbackend.dto.BorrowerRegistrationRequest;
-import com.mb.transactionbackend.exception.DuplicateResourceException;
 import com.mb.transactionbackend.exception.ResourceNotFoundException;
 import com.mb.transactionbackend.mapper.BorrowerMapper;
 import com.mb.transactionbackend.model.Borrower;
 import com.mb.transactionbackend.repository.BorrowerRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -34,136 +30,86 @@ class BorrowerServiceImplTest {
     @InjectMocks
     private BorrowerServiceImpl borrowerService;
 
-    private Borrower testBorrower;
-    private BorrowerRegistrationRequest registrationRequest;
+    private BorrowerRegistrationRequest request;
+    private Borrower sampleBorrower;
 
     @BeforeEach
     void setUp() {
-        testBorrower = Borrower.builder()
+        sampleBorrower = Borrower.builder()
                 .id(1L)
                 .borrowerId("BOR001")
-                .name("John Doe")
-                .email("john.doe@example.com")
+                .name("Alice Smith")
+                .email("alice@example.com")
                 .build();
-        
-        registrationRequest = new BorrowerRegistrationRequest();
-        // Set necessary fields for registrationRequest
-    }
 
-    @Test
-    void registerBorrower_WhenEmailNotInUse_ShouldRegisterAndReturnBorrower() {
-        when(borrowerRepository.findByEmail(anyString())).thenReturn(Optional.empty());
-        when(borrowerMapper.toEntity(any(BorrowerRegistrationRequest.class))).thenReturn(testBorrower);
-        when(borrowerRepository.save(any(Borrower.class))).thenReturn(testBorrower);
-
-        Borrower result = borrowerService.registerBorrower(registrationRequest);
-
-        assertEquals(testBorrower, result);
-        verify(borrowerRepository, times(1)).save(testBorrower);
-    }
-
-    @Test
-    void registerBorrower_WhenEmailInUse_ShouldThrowException() {
-        when(borrowerRepository.findByEmail(anyString())).thenReturn(Optional.of(testBorrower));
-
-        assertThrows(DuplicateResourceException.class, () -> borrowerService.registerBorrower(registrationRequest));
-        verify(borrowerRepository, never()).save(any(Borrower.class));
-    }
-
-    @Test
-    void findById_WhenBorrowerExists_ShouldReturnBorrower() {
-        when(borrowerRepository.findById(1L)).thenReturn(Optional.of(testBorrower));
-
-        Borrower result = borrowerService.findById(1L);
-
-        assertEquals(testBorrower, result);
-    }
-
-    @Test
-    void findById_WhenBorrowerDoesNotExist_ShouldThrowException() {
-        when(borrowerRepository.findById(99L)).thenReturn(Optional.empty());
-
-        assertThrows(ResourceNotFoundException.class, () -> borrowerService.findById(99L));
-    }
-
-    @Test
-    void findByBorrowerId_WhenBorrowerExists_ShouldReturnBorrower() {
-        when(borrowerRepository.findByBorrowerId("BOR001")).thenReturn(Optional.of(testBorrower));
-
-        Borrower result = borrowerService.findByBorrowerId("BOR001");
-
-        assertEquals(testBorrower, result);
-    }
-
-    @Test
-    void findByBorrowerId_WhenBorrowerDoesNotExist_ShouldThrowException() {
-        when(borrowerRepository.findByBorrowerId("NONEXISTENT")).thenReturn(Optional.empty());
-
-        assertThrows(ResourceNotFoundException.class, () -> borrowerService.findByBorrowerId("NONEXISTENT"));
-    }
-
-    @Test
-    void findAllBorrowers_ShouldReturnAllBorrowers() {
-        List<Borrower> borrowers = Arrays.asList(
-                testBorrower,
-                Borrower.builder()
-                        .id(2L)
-                        .borrowerId("BOR002")
-                        .name("Jane Smith")
-                        .email("jane.smith@example.com")
-                        .build()
+        request = new BorrowerRegistrationRequest(
+                "BOR001",
+                "Alice Smith",
+                "alice@example.com"
         );
-
-        when(borrowerRepository.findAll()).thenReturn(borrowers);
-
-        List<Borrower> result = borrowerService.findAllBorrowers();
-
-        assertEquals(2, result.size());
-        assertEquals(borrowers, result);
     }
 
     @Test
-    void updateBorrower_WhenBorrowerExists_ShouldUpdateAndReturn() {
-        Borrower updatedBorrower = Borrower.builder()
-                .id(1L)
-                .borrowerId("BOR001")
-                .name("Updated Name")
-                .email("updated.email@example.com")
-                .build();
+    @DisplayName("registerBorrower: success when ID and email are new")
+    void registerBorrower_Success() {
+        when(borrowerRepository.existsByBorrowerId("BOR001")).thenReturn(false);
+        when(borrowerRepository.existsByEmail("alice@example.com")).thenReturn(false);
+        when(borrowerMapper.toEntity(request)).thenReturn(sampleBorrower);
+        when(borrowerRepository.save(sampleBorrower)).thenReturn(sampleBorrower);
 
-        when(borrowerRepository.findById(1L)).thenReturn(Optional.of(testBorrower));
-        when(borrowerRepository.save(any(Borrower.class))).thenReturn(updatedBorrower);
+        Borrower result = borrowerService.registerBorrower(request);
 
-        Borrower result = borrowerService.updateBorrower(1L, updatedBorrower);
-
-        assertEquals("Updated Name", result.getName());
-        assertEquals("updated.email@example.com", result.getEmail());
-        verify(borrowerRepository, times(1)).save(any(Borrower.class));
+        assertSame(sampleBorrower, result, "Should return the saved borrower");
+        verify(borrowerRepository, times(1)).save(sampleBorrower); // verify save called once :contentReference[oaicite:5]{index=5}
     }
 
     @Test
-    void updateBorrower_WhenBorrowerDoesNotExist_ShouldThrowException() {
-        when(borrowerRepository.findById(99L)).thenReturn(Optional.empty());
+    @DisplayName("registerBorrower: fail on duplicate ID")
+    void registerBorrower_DuplicateId() {
+        when(borrowerRepository.existsByBorrowerId("BOR001")).thenReturn(true);
 
-        assertThrows(ResourceNotFoundException.class, () -> borrowerService.updateBorrower(99L, testBorrower));
-        verify(borrowerRepository, never()).save(any(Borrower.class));
+        IllegalArgumentException ex = assertThrows(
+                IllegalArgumentException.class,
+                () -> borrowerService.registerBorrower(request)
+        );
+        assertEquals("Borrower ID already exists", ex.getMessage());
+        verify(borrowerRepository, never()).save(any());
     }
 
     @Test
-    void deleteBorrower_WhenBorrowerExists_ShouldDeleteBorrower() {
-        when(borrowerRepository.findById(1L)).thenReturn(Optional.of(testBorrower));
-        doNothing().when(borrowerRepository).delete(testBorrower);
+    @DisplayName("registerBorrower: fail on duplicate email")
+    void registerBorrower_DuplicateEmail() {
+        when(borrowerRepository.existsByBorrowerId("BOR001")).thenReturn(false);
+        when(borrowerRepository.existsByEmail("alice@example.com")).thenReturn(true);
 
-        borrowerService.deleteBorrower(1L);
-
-        verify(borrowerRepository, times(1)).delete(testBorrower);
+        IllegalArgumentException ex = assertThrows(
+                IllegalArgumentException.class,
+                () -> borrowerService.registerBorrower(request)
+        );
+        assertEquals("Email already exists", ex.getMessage());
+        verify(borrowerRepository, never()).save(any());
     }
 
     @Test
-    void deleteBorrower_WhenBorrowerDoesNotExist_ShouldThrowException() {
-        when(borrowerRepository.findById(99L)).thenReturn(Optional.empty());
+    @DisplayName("findByBorrowerId: success when borrower exists")
+    void findByBorrowerId_Success() {
+        when(borrowerRepository.findByBorrowerId("BOR001"))
+                .thenReturn(Optional.of(sampleBorrower));
 
-        assertThrows(ResourceNotFoundException.class, () -> borrowerService.deleteBorrower(99L));
-        verify(borrowerRepository, never()).delete(any(Borrower.class));
+        Borrower found = borrowerService.findByBorrowerId("BOR001");
+        assertSame(sampleBorrower, found);
+    }
+
+    @Test
+    @DisplayName("findByBorrowerId: not found throws ResourceNotFoundException")
+    void findByBorrowerId_NotFound() {
+        when(borrowerRepository.findByBorrowerId("BOR999"))
+                .thenReturn(Optional.empty());
+
+        assertThrows(
+                ResourceNotFoundException.class,
+                () -> borrowerService.findByBorrowerId("BOR999"),
+                "Should throw when borrowerId does not exist"
+        );
     }
 }

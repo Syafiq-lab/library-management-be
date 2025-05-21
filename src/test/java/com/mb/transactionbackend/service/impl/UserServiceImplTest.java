@@ -1,151 +1,148 @@
 package com.mb.transactionbackend.service.impl;
 
+import com.mb.transactionbackend.auth.JwtService;
+import com.mb.transactionbackend.dto.AuthRequest;
 import com.mb.transactionbackend.dto.UserRegistrationRequest;
+import com.mb.transactionbackend.enums.RoleEnum;
 import com.mb.transactionbackend.exception.DuplicateResourceException;
 import com.mb.transactionbackend.exception.ResourceNotFoundException;
+import com.mb.transactionbackend.exception.UnauthorizedException;
 import com.mb.transactionbackend.mapper.UserMapper;
 import com.mb.transactionbackend.model.User;
 import com.mb.transactionbackend.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImplTest {
 
-    @Mock
-    private UserRepository userRepository;
+    @Mock private UserRepository userRepository;
+    @Mock private PasswordEncoder passwordEncoder;
+    @Mock private AuthenticationManager authenticationManager;
+    @Mock private JwtService jwtService;
+    @Mock private UserMapper userMapper;
+    @InjectMocks private UserServiceImpl userService;
 
-    @Mock
-    private UserMapper userMapper;
-
-    @Mock
-    private PasswordEncoder passwordEncoder;
-
-    @InjectMocks
-    private UserServiceImpl userService;
-
-    private User testUser;
-    private UserRegistrationRequest registrationRequest;
+    private User sampleUser;
+    private UserRegistrationRequest regRequest;
 
     @BeforeEach
     void setUp() {
-        testUser = User.builder()
+        sampleUser = User.builder()
                 .id(1L)
                 .username("testuser")
-                .password("encoded_password")
+                .password("encoded_pw")
+                .roles(Set.of(RoleEnum.ROLE_USER))
                 .createdAt(Instant.now())
                 .deleted(false)
                 .build();
-        
-        registrationRequest = new UserRegistrationRequest();
-        // Set necessary fields for registrationRequest
+
+        regRequest = new UserRegistrationRequest();
+        regRequest.setUsername("TestUser");
+        regRequest.setPassword("rawpassword");
     }
 
     @Test
-    void registerUser_WhenUsernameNotInUse_ShouldRegisterAndReturnUser() {
-        when(userRepository.findByUsername(anyString())).thenReturn(Optional.empty());
-        when(userMapper.toEntity(any(UserRegistrationRequest.class), any(PasswordEncoder.class))).thenReturn(testUser);
-        when(userRepository.save(any(User.class))).thenReturn(testUser);
+    @DisplayName("registerUser: success when username is new")
+    void registerUser_Success() {
+        when(userRepository.existsByUsernameIgnoreCase("TestUser")).thenReturn(false);
+        when(userMapper.toEntity(eq(regRequest), any(PasswordEncoder.class))).thenReturn(sampleUser);
+        when(userRepository.save(sampleUser)).thenReturn(sampleUser);
 
-        User result = userService.registerUser(registrationRequest);
+        User result = userService.registerUser(regRequest);
 
-        assertEquals(testUser, result);
-        verify(userRepository, times(1)).save(testUser);
+        assertSame(sampleUser, result);
+        verify(userRepository).save(sampleUser);
     }
 
     @Test
-    void registerUser_WhenUsernameInUse_ShouldThrowException() {
-        when(userRepository.findByUsername(anyString())).thenReturn(Optional.of(testUser));
+    @DisplayName("registerUser: throws on duplicate username")
+    void registerUser_Duplicate() {
+        when(userRepository.existsByUsernameIgnoreCase("TestUser")).thenReturn(true);
 
-        assertThrows(DuplicateResourceException.class, () -> userService.registerUser(registrationRequest));
-        verify(userRepository, never()).save(any(User.class));
-    }
-
-    @Test
-    void findById_WhenUserExists_ShouldReturnUser() {
-        when(userRepository.findById(1L)).thenReturn(Optional.of(testUser));
-
-        User result = userService.findById(1L);
-
-        assertEquals(testUser, result);
-    }
-
-    @Test
-    void findById_WhenUserDoesNotExist_ShouldThrowException() {
-        when(userRepository.findById(99L)).thenReturn(Optional.empty());
-
-        assertThrows(ResourceNotFoundException.class, () -> userService.findById(99L));
-    }
-
-    @Test
-    void findByUsername_WhenUserExists_ShouldReturnUser() {
-        when(userRepository.findByUsername("testuser")).thenReturn(Optional.of(testUser));
-
-        User result = userService.findByUsername("testuser");
-
-        assertEquals(testUser, result);
-    }
-
-    @Test
-    void findByUsername_WhenUserDoesNotExist_ShouldThrowException() {
-        when(userRepository.findByUsername("nonexistent")).thenReturn(Optional.empty());
-
-        assertThrows(ResourceNotFoundException.class, () -> userService.findByUsername("nonexistent"));
-    }
-
-    @Test
-    void findAllUsers_ShouldReturnAllUsers() {
-        List<User> users = Arrays.asList(
-                testUser,
-                User.builder()
-                        .id(2L)
-                        .username("anotheruser")
-                        .password("another_password")
-                        .createdAt(Instant.now())
-                        .deleted(false)
-                        .build()
+        DuplicateResourceException ex = assertThrows(
+                DuplicateResourceException.class,
+                () -> userService.registerUser(regRequest)
         );
-
-        when(userRepository.findAll()).thenReturn(users);
-
-        List<User> result = userService.findAllUsers();
-
-        assertEquals(2, result.size());
-        assertEquals(users, result);
+        assertEquals("Username already taken", ex.getMessage());
+        verify(userRepository, never()).save(any());
     }
-    
+
+
     @Test
-    void deleteUser_WhenUserExists_ShouldMarkAsDeleted() {
-        when(userRepository.findById(1L)).thenReturn(Optional.of(testUser));
-        when(userRepository.save(any(User.class))).thenReturn(testUser);
+    @DisplayName("authenticateUser: success returns token")
+    void authenticateUser_Success() {
+        AuthRequest auth = new AuthRequest();
+        auth.setUsername("testuser");
+        auth.setPassword("rawpassword");
+        Authentication mockAuth = mock(Authentication.class);
+        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
+                .thenReturn(mockAuth);
+        when(jwtService.generateToken(mockAuth)).thenReturn("jwt-token");
+
+        String token = userService.authenticateUser(auth);
+
+        assertEquals("jwt-token", token);
+        verify(jwtService).generateToken(mockAuth);
+    }
+
+    @Test
+    @DisplayName("getCurrentUser: returns user from security context")
+    void getCurrentUser_Success() {
+        Authentication auth = mock(Authentication.class);
+        when(auth.getName()).thenReturn("testuser");
+        SecurityContextHolder.getContext().setAuthentication(auth);
+        when(userRepository.findByUsernameIgnoreCase("testuser"))
+                .thenReturn(Optional.of(sampleUser));
+
+        User current = userService.getCurrentUser();
+
+        assertSame(sampleUser, current);
+    }
+
+    @Test
+    @DisplayName("getCurrentUser: throws if no auth")
+    void getCurrentUser_NoAuth() {
+        SecurityContextHolder.clearContext();
+        assertThrows(UnauthorizedException.class, () -> userService.getCurrentUser());
+    }
+
+    @Test
+    @DisplayName("deleteUser: soft-deletes existing user")
+    void deleteUser_Success() {
+        when(userRepository.findById(1L)).thenReturn(Optional.of(sampleUser));
+        when(userRepository.save(sampleUser)).thenReturn(sampleUser);
 
         userService.deleteUser(1L);
 
-        assertTrue(testUser.isDeleted());
-        verify(userRepository, times(1)).save(testUser);
+        assertTrue(sampleUser.isDeleted());
+        verify(userRepository).save(sampleUser);
     }
 
     @Test
-    void deleteUser_WhenUserDoesNotExist_ShouldThrowException() {
+    @DisplayName("deleteUser: throws if not found")
+    void deleteUser_NotFound() {
         when(userRepository.findById(99L)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> userService.deleteUser(99L));
-        verify(userRepository, never()).save(any(User.class));
+        verify(userRepository, never()).save(any());
     }
+
 }

@@ -3,7 +3,6 @@ package com.mb.transactionbackend.service.impl;
 import com.mb.transactionbackend.auth.JwtService;
 import com.mb.transactionbackend.dto.AuthRequest;
 import com.mb.transactionbackend.dto.UserRegistrationRequest;
-import com.mb.transactionbackend.enums.RoleEnum;
 import com.mb.transactionbackend.exception.DuplicateResourceException;
 import com.mb.transactionbackend.exception.ResourceNotFoundException;
 import com.mb.transactionbackend.exception.UnauthorizedException;
@@ -22,9 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
 import java.util.Optional;
-import java.util.Set;
 
 @Slf4j
 @Service
@@ -44,7 +41,6 @@ public class UserServiceImpl implements UserService {
     public User registerUser(UserRegistrationRequest request) {
         log.info("Processing user registration request for username: {}", request.getUsername());
         
-        /* ---- basic validation ---- */
         if (userRepository.existsByUsernameIgnoreCase(request.getUsername())) {
             log.warn("Registration failed: Username '{}' already taken", request.getUsername());
             throw new DuplicateResourceException("Username already taken");
@@ -69,7 +65,6 @@ public class UserServiceImpl implements UserService {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            /* ---- generate JWT using the JwtService ---- */
             String token = jwtService.generateToken(authentication);
             log.info("Authentication successful for user: {}", request.getUsername());
             return token;
@@ -111,7 +106,7 @@ public class UserServiceImpl implements UserService {
                     return new ResourceNotFoundException("User not found");
                 });
 
-        user.setDeleted(true); // soft delete
+        user.setDeleted(true);
         userRepository.save(user);
         log.info("User with ID: {} has been soft-deleted", userId);
     }

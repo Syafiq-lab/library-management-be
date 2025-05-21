@@ -21,32 +21,18 @@ public class LoanController {
     @PostMapping("/borrow")
     public ResponseEntity<ApiResponse<Loan>> borrowBook(@Valid @RequestBody LoanRequest request) {
         log.info("Received borrow request for book ID: {} by borrower ID: {}", request.bookId(), request.borrowerId());
-        
-        try {
-            Loan loan = loanService.borrowBook(request);
-            log.info("Successfully processed borrow request for book ID: {} by borrower ID: {}", 
-                    request.bookId(), request.borrowerId());
-            return ResponseEntity.ok(ApiResponse.success("Book borrowed", loan));
-        } catch (Exception e) {
-            log.error("Failed to process borrow request for book ID: {} by borrower ID: {}: {}", 
-                    request.bookId(), request.borrowerId(), e.getMessage());
-            throw e;
-        }
+        Loan loan = loanService.borrowBook(request);
+        log.info("Successfully processed borrow request for book ID: {} by borrower ID: {}",
+                request.bookId(), request.borrowerId());
+        return ResponseEntity.ok(ApiResponse.success("Book borrowed", loan));
     }
 
     @PostMapping("/return")
     public ResponseEntity<ApiResponse<Loan>> returnBook(@Valid @RequestBody LoanRequest request) {
         log.info("Received return request for book ID: {} by borrower ID: {}", request.bookId(), request.borrowerId());
-        
-        try {
-            Loan loan = loanService.returnBook(request);
-            log.info("Successfully processed return request for book ID: {} by borrower ID: {}", 
-                    request.bookId(), request.borrowerId());
-            return ResponseEntity.ok(ApiResponse.success("Book returned", loan));
-        } catch (Exception e) {
-            log.error("Failed to process return request for book ID: {} by borrower ID: {}: {}", 
-                    request.bookId(), request.borrowerId(), e.getMessage());
-            throw e;
-        }
+        Loan loan = loanService.returnBook(request);
+        log.info("Successfully processed return request for book ID: {} by borrower ID: {}",
+                request.bookId(), request.borrowerId());
+        return ResponseEntity.ok(ApiResponse.success("Book returned", loan));
     }
 }
