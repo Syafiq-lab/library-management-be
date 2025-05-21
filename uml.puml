@@ -1,0 +1,183 @@
+@startuml
+class LoggingAspect {
+- Logger logger
++ void logBefore(JoinPoint)
++ Object logAround(ProceedingJoinPoint)
++ void logAfterThrowing(JoinPoint,Throwable)
+}
+
+
+interface TransactionRepository {
+~ Page<Transaction> findByCustomerId(String,Pageable)
+~ Page<Transaction> findByAccountNumber(String,Pageable)
+~ Page<Transaction> findByDescriptionContaining(String,Pageable)
+~ Page<Transaction> findByCustomerIdContainingOrAccountNumberContainingOrDescriptionContaining(String,String,String,Pageable)
+}
+
+class TransactionUpdateRequest {
+- String accountNumber
+- String description
+- Double trxAmount
+- LocalDate trxDate
+- LocalTime trxTime
+}
+
+class User {
+- Long id
+- String username
+- String password
+- String role
+}
+
+class TransactionService {
+- {static} Logger logger
+- TransactionRepository transactionRepository
++ Page<Transaction> searchTransactions(String,String,String,int,int)
++ Page<Transaction> searchTransactionsAnyField(String,int,int)
++ Transaction updateTransaction(Long,TransactionUpdateRequest)
+}
+
+
+class JwtAuthenticationEntryPoint {
++ void commence(HttpServletRequest,HttpServletResponse,AuthenticationException)
+}
+
+class TransactionBackEndApplicationTests {
+~ void contextLoads()
+}
+
+class UserRegistrationRequest {
+- String username
+- String password
+}
+
+class SecurityConfig {
++ SecurityFilterChain securityFilterChain(HttpSecurity,JwtRequestFilter)
++ AuthenticationManager authenticationManager(AuthenticationConfiguration)
++ PasswordEncoder passwordEncoder()
++ CorsConfigurationSource corsConfigurationSource()
+}
+
+interface UserRepository {
+~ User findByUsername(String)
+}
+
+class JwtUserDetailsService {
+- UserRepository userRepository
+- PasswordEncoder passwordEncoder
++ UserDetails loadUserByUsername(String)
++ User save(User)
+}
+
+
+class AuthController {
+- AuthenticationManager authenticationManager
+- JwtTokenUtil jwtTokenUtil
+- JwtUserDetailsService userDetailsService
++ ResponseEntity<AuthResponse> createAuthenticationToken(AuthRequest)
++ ResponseEntity<ApiResponse<User>> registerUser(UserRegistrationRequest)
+}
+
+
+class JwtRequestFilter {
+- {static} Logger logger
+- JwtUserDetailsService jwtUserDetailsService
+- JwtTokenUtil jwtTokenUtil
+# void doFilterInternal(HttpServletRequest,HttpServletResponse,FilterChain)
+}
+
+
+class ResourceNotFoundException {
+}
+class AuthResponse {
+- String token
+}
+
+class TransactionController {
+- {static} Logger logger
+- TransactionService transactionService
++ ResponseEntity<ApiResponse<Map<String,Object>>> searchTransactions(String,String,String,int,int)
++ ResponseEntity<ApiResponse<Map<String,Object>>> searchTransactionsAnyField(String,int,int)
++ ResponseEntity<ApiResponse<Transaction>> updateTransaction(Long,TransactionUpdateRequest)
+}
+
+
+class JwtExceptionHandler {
++ ResponseEntity<String> handleSignatureException(SignatureException)
++ ResponseEntity<String> handleExpiredJwtException(ExpiredJwtException)
++ ResponseEntity<String> handleOtherExceptions(Exception)
+}
+
+class JwtTokenUtil {
+- {static} long serialVersionUID
++ {static} long JWT_TOKEN_VALIDITY
+- {static} Logger logger
+- Key secretKey
++ String getUsernameFromToken(String)
++ Date getExpirationDateFromToken(String)
++ T getClaimFromToken(String,Function<Claims,T>)
+- Claims getAllClaimsFromToken(String)
+- Boolean isTokenExpired(String)
++ String generateToken(UserDetails)
+- String doGenerateToken(Map<String,Object>,String)
++ Boolean validateToken(String,UserDetails)
+}
+
+
+class TransactionServiceTest {
+- TransactionRepository transactionRepository
+- TransactionService transactionService
+~ void setUp()
+~ void searchTransactions_shouldReturnResults()
+~ void updateTransaction_whenTransactionExists_shouldUpdateTransaction()
+~ void updateTransaction_whenTransactionDoesNotExist_shouldThrowResourceNotFoundException()
+}
+
+
+class TransactionBackEndApplication {
++ {static} void main(String[])
+}
+
+class AuthRequest {
+- String username
+- String password
+}
+
+class GlobalExceptionHandler {
+- {static} Logger logger
++ ResponseEntity<ApiResponse<Object>> handleGlobalException(Exception,WebRequest)
++ ResponseEntity<ApiResponse<Object>> handleResourceNotFoundException(ResourceNotFoundException,WebRequest)
++ ResponseEntity<ApiResponse<String>> handleBadCredentialsException(BadCredentialsException,WebRequest)
++ ResponseEntity<ApiResponse<String>> handleUsernameNotFoundException(UsernameNotFoundException,WebRequest)
++ ResponseEntity<ApiResponse<String>> handleAccessDeniedException(AccessDeniedException,WebRequest)
++ ResponseEntity<ApiResponse<Map<String,String>>> handleValidationExceptions(MethodArgumentNotValidException)
+}
+
+
+class Transaction {
+- Long id
+- String accountNumber
+- Double trxAmount
+- String description
+- LocalDate trxDate
+- LocalTime trxTime
+- String customerId
+- Integer version
+}
+
+class ApiResponse {
+- boolean success
+- String message
+- T data
+}
+
+
+
+JpaRepository <|-- TransactionRepository
+AuthenticationEntryPoint <|.. JwtAuthenticationEntryPoint
+JpaRepository <|-- UserRepository
+UserDetailsService <|.. JwtUserDetailsService
+OncePerRequestFilter <|-- JwtRequestFilter
+RuntimeException <|-- ResourceNotFoundException
+Serializable <|.. JwtTokenUtil
+@enduml
