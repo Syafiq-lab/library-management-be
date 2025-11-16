@@ -6,9 +6,17 @@ import com.example.userservice.web.dto.UserResponse;
 import com.example.userservice.web.dto.UserUpdateRequest;
 import org.mapstruct.*;
 
-@Mapper(componentModel = "spring")
+import java.time.Instant;
+
+@Mapper(componentModel = "spring",
+        unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        imports = Instant.class)
 public interface UserMapper {
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "active", constant = "true")
+    @Mapping(target = "createdAt", expression = "java(Instant.now())")
+    @Mapping(target = "updatedAt", expression = "java(Instant.now())")
     User toEntity(UserCreateRequest request);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

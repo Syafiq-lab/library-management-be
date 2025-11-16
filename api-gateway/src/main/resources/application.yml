@@ -4,46 +4,61 @@ server:
 spring:
   application:
     name: api-gateway
+
   main:
     web-application-type: reactive
+
   cloud:
     gateway:
-      routes:
-        - id: user-service
-          uri: lb://user-service
-          predicates:
-            - Path=/api/users/**
-          filters:
-            - StripPrefix=1
-            - name: CircuitBreaker
+      server:
+        webflux:
+          default-filters:
+            - name: RemoveRequestHeader
               args:
-                name: userServiceCircuitBreaker
-                fallbackUri: forward:/fallback/users
-        - id: inventory-service
-          uri: lb://inventory-service
-          predicates:
-            - Path=/api/inventory/**
-          filters:
-            - StripPrefix=1
-            - name: CircuitBreaker
-              args:
-                name: inventoryServiceCircuitBreaker
-                fallbackUri: forward:/fallback/inventory
-        - id: qr-service
-          uri: lb://qr-service
-          predicates:
-            - Path=/api/qr/**
-          filters:
-            - StripPrefix=1
-            - name: CircuitBreaker
-              args:
-                name: qrServiceCircuitBreaker
-                fallbackUri: forward:/fallback/qr
-      default-filters:
-        - name: RequestRateLimiter
-          args:
-            redis-rate-limiter.replenishRate: 50
-            redis-rate-limiter.burstCapacity: 100
+                name: Cookie
+          routes:
+            - id: user-service
+              uri: lb://user-service
+              predicates:
+                - Path=/api/users/**, /users/**          # adjust to your user controller paths
+              filters:
+                - StripPrefix=1
+                - name: CircuitBreaker
+                  args:
+                    name: userServiceCircuitBreaker
+                    fallbackUri: forward:/fallback/users
+
+            - id: inventory-service
+              uri: lb://inventory-service
+              predicates:
+                - Path=/api/inventory/**, /inventory/**   # adjust to your inventory paths
+              filters:
+                - StripPrefix=1
+                - name: CircuitBreaker
+                  args:
+                    name: inventoryServiceCircuitBreaker
+                    fallbackUri: forward:/fallback/inventory
+
+            - id: qr-service
+              uri: lb://qr-service
+              predicates:
+                - Path=/api/qr/**, /qr/**                 # adjust to your qr paths
+              filters:
+                - StripPrefix=1
+                - name: CircuitBreaker
+                  args:
+                    name: qrServiceCircuitBreaker
+                    fallbackUri: forward:/fallback/qr
+
+    stream:
+      defaultBinder: kafka
+      kafka:
+        binder:
+          brokers: localhost:9092
+      bindings:
+        audit-out-0:
+          destination: audit-events
+          contentType: application/json
 
 eureka:
   client:
@@ -54,14 +69,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,prometheus
+        include: health,info,metrics,prometheus
   endpoint:
     health:
-      show-details: always
-
-springdoc:
-  api-docs:
-    enabled: true
-  swagger-ui:
-    enabled: true
-    path: /swagger-ui.html
+      show-details: when_authorized

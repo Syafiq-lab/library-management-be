@@ -1,15 +1,14 @@
 package com.example.userservice.web.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
+@NoArgsConstructor          // important so MapStruct can create it
 @AllArgsConstructor
-@Builder
 public class UserResponse {
+
     private Long id;
     private String username;
     private String email;

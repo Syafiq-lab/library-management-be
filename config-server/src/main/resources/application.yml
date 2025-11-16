@@ -8,6 +8,7 @@ spring:
     config:
       server:
         git:
+          # Local config repo. Can be a real Git repo or just a plain folder.
           uri: file:./config-repo
           default-label: main
           clone-on-start: false

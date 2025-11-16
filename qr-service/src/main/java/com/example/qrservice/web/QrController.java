@@ -7,29 +7,39 @@ import com.example.qrservice.web.dto.QrGenerateRequest;
 import com.example.qrservice.web.dto.QrGenerateResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/qr")
 @RequiredArgsConstructor
-@Tag(name = "QR", description = "QR generator and reader APIs")
+@Tag(name = "QR Service", description = "Generate and decode QR codes")
 public class QrController {
 
-    private final QrService service;
+    private final QrService qrService;
 
-    @PostMapping("/generate")
-    @ResponseStatus(HttpStatus.CREATED)
-    @Operation(summary = "Generate QR code from payload")
-    public QrGenerateResponse generate(@Valid @RequestBody QrGenerateRequest request) {
-        return service.generate(request);
+    @PostMapping(
+            path = "/generate",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @Operation(summary = "Generate a QR code for the given payload")
+    public ResponseEntity<QrGenerateResponse> generate(
+            @Validated @RequestBody QrGenerateRequest request) {
+        return ResponseEntity.ok(qrService.generate(request));
     }
 
-    @PostMapping("/decode")
-    @Operation(summary = "Decode QR code from base64 image")
-    public QrDecodeResponse decode(@Valid @RequestBody QrDecodeRequest request) {
-        return service.decode(request);
+    @PostMapping(
+            path = "/decode",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @Operation(summary = "Decode a QR code image (Base64 PNG)")
+    public ResponseEntity<QrDecodeResponse> decode(
+            @Validated @RequestBody QrDecodeRequest request) {
+        return ResponseEntity.ok(qrService.decode(request));
     }
 }

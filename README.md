@@ -1,57 +1,301 @@
-# Advanced Spring Boot 3.5 Microservices Backend
+# Advanced Spring Boot Microservices Backend
 
-This is a fully working backend template designed to sit behind your frontend.
+This repository is a **multi module Spring Boot microservices template** designed for a real world backend with:
 
-## Stack
+- Service discovery
+- Centralized configuration
+- API gateway with routing and circuit breakers
+- Domain services for user, inventory, and QR
+- Kafka based event streaming and audit logging
+- MySQL as primary database
 
-- Spring Boot 3.5.7 (Java 21)
-- Spring Cloud 2025.0.0 (Northfields) for microservices patterns
-- Spring Data JPA (H2 + Postgres)
-- Spring Cloud Gateway, Eureka, Config Server, OpenFeign, Resilience4j
-- Spring Security (basic auth starter setup)
-- springdoc-openapi 2.8.14 (Swagger UI for every service)
-- MapStruct 1.6.3 + Lombok for DTO mapping and boilerplate reduction
-- Testcontainers for integration testing stubs
-- ZXing for QR code generation and decoding
+It is intentionally written so that **senior developers** can dive straight into modules and architecture, while **fresh developers** can learn from the folder structure, naming and comments.
 
-## Microservices
+---
 
-- `user-service`  
-  Basic user management with OOP layering, DTOs for requests and responses, MapStruct mapping, validation and exception handling.
+## 1. High level architecture
 
-- `inventory-service`  
-  Inventory items linked to users. Validates user existence via OpenFeign call to user-service. Demonstrates inter-service communication and Resilience4j.
+**Core building blocks**
 
-- `qr-service`  
-  QR code creator and reader:
-  - Generate QR from arbitrary payload
-  - Decode QR from base64 image
-  - Persist basic QR audit record
+1. **Service Registry**  
+   - Eureka server that keeps a registry of all running services.  
+   - Other services register themselves and discover each other using logical names (`user-service`, `inventory-service`, `qr-service`, `api-gateway`, `config-server`).
 
-- `api-gateway`  
-  Single entry point with routing to user, inventory and QR services, circuit breaker and fallback, and an aggregated Swagger UI base.
+2. **Config Server**  
+   - Spring Cloud Config Server that reads configuration from a `config-repo` folder (or Git repo).  
+   - Each service can fetch its configuration from here instead of hardcoding everything in its own jar.
 
-- `service-registry`  
-  Eureka discovery server.
+3. **API Gateway**  
+   - Spring Cloud Gateway (reactive, WebFlux).  
+   - Acts as the single entry point for the frontend.  
+   - Routes HTTP requests to downstream services using service discovery (`lb://user-service`, etc).  
+   - Adds **cross cutting concerns**:
+     - Circuit breakers with fallbacks
+     - Basic header manipulation (strip prefix, remove cookies, add trace IDs)
+     - Audit logging to Kafka
 
-- `config-server`  
-  Spring Cloud Config server (file Git repo placeholder, easy to switch to real Git).
+4. **Domain Services**
+   - **user-service**  
+     Manages user accounts, basic profile data, and security related operations.
+   - **inventory-service**  
+     Manages items owned by users (belongs to `ownerUserId`). Calls `user-service` to validate user existence.
+   - **qr-service**  
+     Generates and decodes QR codes using ZXing, and can persist metadata.
 
-## How to run
+5. **common-lib**
+   - Shared DTOs, event classes, and basic utilities that are used by multiple services to avoid duplication.
 
-1. Build all modules
+6. **Messaging and Audit**
+   - Kafka is used as the message broker.
+   - Spring Cloud Stream is used to **publish structured events**:
+     - `AuditEvent` from API gateway to `audit-events` topic.
+     - Domain events (user, inventory, qr) can be published to their own topics.
+   - Other services may later subscribe to these topics to build analytics, notifications, etc.
+
+7. **Database**
+   - MySQL is used as the primary relational store.  
+   - For simplicity, both `user-service` and `inventory-service` can point to the same `userdb` schema (or you can split later if needed).  
+   - QR service can also use MySQL for persistence.
+
+---
+
+## 2. Module layout
+
+At the top level:
+
+```text
+advanced-microservices-backend/
+  ├─ pom.xml                      # parent Maven pom
+  ├─ README.md                    # this file
+  ├─ common-lib/
+  ├─ service-registry/
+  ├─ config-server/
+  ├─ api-gateway/
+  ├─ user-service/
+  ├─ inventory-service/
+  └─ qr-service/
+```
+
+### Typical service structure
+
+Inside each service (for example `user-service`) you will see a layered structure:
+
+```text
+user-service/src/main/java/com/example/userservice/
+  ├─ domain/          # JPA entities, domain models
+  ├─ repository/      # Spring Data JPA repositories
+  ├─ service/         # business logic (Application services)
+  ├─ web/             # controllers and DTOs (request/response)
+  ├─ mapping/         # MapStruct mappers
+  ├─ client/          # HTTP clients to other microservices
+  ├─ messaging/       # event publishers / consumers (Kafka, etc)
+  └─ config/          # Spring configuration classes
+```
+
+This is a classic **hexagonal / layered** style:
+
+- Controllers only deal with HTTP and DTOs.
+- Services contain business rules.
+- Repositories hide persistence details.
+- Mappers convert between domain and DTOs.
+
+---
+
+## 3. How the services communicate
+
+### 3.1 Frontend → Gateway → Backend services
+
+1. **Frontend** calls `http://localhost:8080` (API gateway).
+2. **API Gateway** uses **routing rules** to forward:
+   - `/api/users/**` → `lb://user-service`
+   - `/api/inventory/**` → `lb://inventory-service`
+   - `/api/qr/**` → `lb://qr-service`
+3. The `lb://` prefix means:
+   - Lookup the service name in Eureka registry
+   - Load balance across instances if multiple are running.
+
+If a downstream service is down or slow, the **circuit breaker** on the gateway triggers and:
+
+- Returns a fallback JSON from `FallbackController`
+- Optionally logs or sends metrics.
+
+### 3.2 Service → Service call
+
+Example: `inventory-service` creates an item for a given user.
+
+1. `inventory-service` receives `POST /api/inventory` with `ownerUserId`.
+2. `InventoryService` calls `UserClient` (a HTTP client) which targets `user-service` via service discovery.
+3. If `user-service` returns OK, the inventory item is saved.
+4. If `user-service` is down, Resilience4J circuit breaker can fall back (or throw custom exception).
+
+### 3.3 Event / MQ communication (Kafka)
+
+Every HTTP request through gateway is audited:
+
+1. API gateway `WebFilter` builds an `AuditEvent` with:
+   - Trace ID
+   - Path, method
+   - Client IP
+   - Timestamp
+2. It uses `AuditPublisher` and `StreamBridge` to send `AuditEvent` to binding `audit-out-0`.
+3. `audit-out-0` is mapped (via `application.yml`) to Kafka topic `audit-events`.
+4. Any downstream consumer service can subscribe to `audit-events` for monitoring or analytics.
+
+You can extend the same pattern for domain events:
+
+- `user-service` → `user-events` topic
+- `inventory-service` → `inventory-events` topic
+- `qr-service` → `qr-events` topic
+
+---
+
+## 4. Basic things you must run locally
+
+For a local developer setup you need:
+
+1. **Java JDK**  
+   - JDK 23 (or any version supported by your Spring Boot version).
+
+2. **MySQL**
+   - Example configuration:
+     - Host: `localhost`
+     - Port: `3306`
+     - Database: `userdb`
+     - User: `user`
+     - Password: `password`
+   - Make sure those values match each service `application.yml` (or later the config-server properties).
+
+3. **Kafka + Zookeeper**
+   - You can use Docker for convenience, for example:
+
+     ```bash
+     docker compose up -d   # if you have a docker-compose file
+     ```
+
+     or install Kafka locally and run:
+
+     ```bash
+     # example, adjust to your installation
+     bin/zookeeper-server-start.sh config/zookeeper.properties
+     bin/kafka-server-start.sh config/server.properties
+     ```
+
+4. **Config repo**
+   - For now the services are still reading from local `application.yml` inside each module.
+   - Later we will move those configurations to `config-repo` and point config-server to it.
+
+---
+
+## 5. Run order (local development)
+
+Recommended order:
+
+1. **Service registry**
 
    ```bash
-   mvn clean install
+   cd service-registry
+   mvn spring-boot:run
+   # Visit http://localhost:8761 to see the registry UI
    ```
 
-2. Run in this order (each in its own terminal)
+2. **Config server**
 
    ```bash
-   cd service-registry && mvn spring-boot:run
-   cd ../config-server && mvn spring-boot:run
-   cd ../user-service && mvn spring-boot:run
-   cd ../inventory-service && mvn spring-boot:run
-   cd ../qr-service && mvn spring-boot:run
-   cd ../api-gateway && mvn spring-boot:run
+   cd config-server
+   mvn spring-boot:run
+   # Exposes config at http://localhost:8888
    ```
+
+3. **Infrastructure: MySQL + Kafka**  
+   - Make sure MySQL and Kafka are running.
+
+4. **Domain services**
+
+   ```bash
+   cd user-service
+   mvn spring-boot:run
+
+   cd inventory-service
+   mvn spring-boot:run
+
+   cd qr-service
+   mvn spring-boot:run
+   ```
+
+5. **API gateway**
+
+   ```bash
+   cd api-gateway
+   mvn spring-boot:run
+   # Gateway now listens on http://localhost:8080
+   ```
+
+---
+
+## 6. For senior developers
+
+Things you may care about:
+
+- **Version alignment**  
+  - Parent pom manages Spring Boot, Spring Cloud, Spring Cloud Stream, MapStruct, Lombok versions.
+- **Cross cutting concerns**  
+  - Centralized config via config-server (once enabled).
+  - Circuit breakers at gateway level.
+  - Kafka based audit events.
+- **Extensibility**  
+  - Add new microservices by:
+    - Creating a new module
+    - Registering with Eureka
+    - Adding a route in gateway
+    - Optionally wiring Kafka producers / consumers for events.
+
+---
+
+## 7. For fresh developers
+
+Key ideas to learn from this template:
+
+1. **Separation of concerns**  
+   - Controllers handle HTTP.
+   - Services handle business logic.
+   - Repositories handle DB.
+   - Mappers convert between domain and DTOs.
+
+2. **Why use an API gateway?**  
+   - Frontend talks to a single URL.
+   - We can centralize security, logging, and routing logic.
+
+3. **Why use a service registry?**  
+   - We do not hardcode `http://localhost:8081` for user-service.
+   - We use service name (`lb://user-service`) and let Eureka do the lookup.
+
+4. **Why message queue / Kafka?**  
+   - HTTP is good for request reply.
+   - Kafka is good for event driven patterns (audit, analytics, async workflows).
+
+5. **How config will be centralized** (later step)  
+   - Instead of each service having its own `application.yml`, we can define e.g.
+     - `user-service.properties`
+     - `inventory-service.properties`
+   - Config server serves them, and services load them from there. This makes configuration changes easier in production.
+
+---
+
+## 8. Per service documentation
+
+Each module has its own `README.md` with:
+
+- Purpose
+- Package layout
+- Important configuration
+- How it communicates with others
+- Examples of typical flows
+
+See:
+
+- `service-registry/README.md`
+- `config-server/README.md`
+- `api-gateway/README.md`
+- `user-service/README.md`
+- `inventory-service/README.md`
+- `qr-service/README.md`
