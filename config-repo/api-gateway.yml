@@ -1,0 +1,75 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  main:
+    web-application-type: reactive
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          default-filters:
+            - name: RemoveRequestHeader
+              args:
+                name: Cookie
+          routes:
+            - id: user-service
+              uri: lb://user-service
+              predicates:
+                - Path=/api/users/**, /users/**
+              filters:
+                - StripPrefix=1
+                - name: CircuitBreaker
+                  args:
+                    name: userServiceCircuitBreaker
+                    fallbackUri: forward:/fallback/users
+
+            - id: inventory-service
+              uri: lb://inventory-service
+              predicates:
+                - Path=/api/inventory/**, /inventory/**
+              filters:
+                - StripPrefix=1
+                - name: CircuitBreaker
+                  args:
+                    name: inventoryServiceCircuitBreaker
+                    fallbackUri: forward:/fallback/inventory
+
+            - id: qr-service
+              uri: lb://qr-service
+              predicates:
+                - Path=/api/qr/**, /qr/**
+              filters:
+                - StripPrefix=1
+                - name: CircuitBreaker
+                  args:
+                    name: qrServiceCircuitBreaker
+                    fallbackUri: forward:/fallback/qr
+
+    stream:
+      defaultBinder: kafka
+      kafka:
+        binder:
+          brokers: localhost:9092
+      bindings:
+        audit-out-0:
+          destination: audit-events
+          contentType: application/json
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when_authorized

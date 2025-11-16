@@ -1,0 +1,59 @@
+server:
+  port: 8091  # or 8082, pick one and be consistent
+
+spring:
+  application:
+    name: user-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/userdb?createDatabaseIfNotExist=true&serverTimezone=UTC
+    username: root
+    password: ""
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  cloud:
+    stream:
+      default-binder: kafka
+      bindings:
+        userCreated-out-0:
+          destination: user.events.created
+          content-type: application/json
+        userUpdated-out-0:
+          destination: user.events.updated
+          content-type: application/json
+      kafka:
+        binder:
+          brokers: localhost:9092
+          auto-create-topics: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs

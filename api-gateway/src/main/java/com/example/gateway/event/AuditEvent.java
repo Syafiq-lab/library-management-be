@@ -2,20 +2,19 @@ package com.example.gateway.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
-@Data
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuditEvent {
 
-	private String traceId;
 	private String path;
 	private String method;
-	private String clientIp;
+	private int statusCode;
 	private Instant timestamp;
 }
