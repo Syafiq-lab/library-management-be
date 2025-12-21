@@ -1,6 +1,6 @@
-#service-api-gateway
+#auth-service (service folder minimal)
 spring:
   application:
-    name: api-gateway
+    name: auth-service
   config:
     import: "optional:configserver:http://localhost:8888"

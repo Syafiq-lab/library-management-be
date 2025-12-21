@@ -1,3 +1,4 @@
+#service-inventory-service
 spring:
   application:
     name: inventory-service

@@ -1,3 +1,4 @@
+#user-service
 spring:
   application:
     name: user-service

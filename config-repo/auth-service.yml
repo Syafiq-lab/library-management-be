@@ -1,0 +1,14 @@
+#config-repo-auth-service.yml
+server:
+  port: 8094
+
+spring:
+  application:
+    name: auth-service
+
+security:
+  jwt:
+    # Use at least 32 random characters here and externalize in real environments
+    secret: local
+    expiration-ms: 900000            # 15 minutes
+    refresh-expiration-ms: 604800000 # 7 days

@@ -1,3 +1,4 @@
+#qr-service
 spring:
   application:
     name: qr-service
