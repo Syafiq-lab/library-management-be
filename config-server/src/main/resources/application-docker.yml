@@ -1,0 +1,12 @@
+# config-server/src/main/resources/application-docker.yml
+spring:
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:/config-repo
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-registry:8761/eureka/

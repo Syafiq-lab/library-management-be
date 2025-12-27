@@ -300,3 +300,96 @@ See:
 - `user-service/README.md`
 - `inventory-service/README.md`
 - `qr-service/README.md`
+
+
+## Swagger URLs (All Services)
+
+### API Gateway (Aggregated Swagger UI)
+- http://localhost:8080/swagger-ui.html
+- http://localhost:8080/swagger-ui/index.html
+
+### Gateway-proxied OpenAPI JSON
+- http://localhost:8080/auth/v3/api-docs
+- http://localhost:8080/users/v3/api-docs
+- http://localhost:8080/inventory/v3/api-docs
+- http://localhost:8080/qr/v3/api-docs
+
+### Auth Service (Direct)
+- http://localhost:8090/swagger-ui.html
+- http://localhost:8090/v3/api-docs
+
+### User Service (Direct)
+- http://localhost:8091/swagger-ui.html
+- http://localhost:8091/v3/api-docs
+
+### Inventory Service (Direct)
+- http://localhost:8092/swagger-ui.html
+- http://localhost:8092/v3/api-docs
+
+### QR Service (Direct)
+- http://localhost:8093/swagger-ui.html
+- http://localhost:8093/v3/api-docs
+
+### Service Registry (Eureka) (Optional)
+- http://localhost:8761
+- http://localhost:8761/swagger-ui.html
+- http://localhost:8761/v3/api-docs
+
+### Config Server (Optional)
+- http://localhost:8888
+- http://localhost:8888/actuator/health
+
+# API URLs (use **only** API Gateway on `:8080`)
+
+Your services are exposed through Spring Cloud Gateway routes. The `StripPrefix` filter removes N path segments before forwarding downstream. :contentReference[oaicite:0]{index=0}
+
+## Base API prefixes (via Gateway)
+
+Use either the `/api/...` style or the short style:
+
+### Auth Service
+- `http://localhost:8080/api/auth/<endpoint>`
+- `http://localhost:8080/auth/<endpoint>`
+
+### User Service
+- `http://localhost:8080/api/users/<endpoint>`
+- `http://localhost:8080/users/<endpoint>`
+
+### Inventory Service
+- `http://localhost:8080/api/inventory/<endpoint>`
+- `http://localhost:8080/inventory/<endpoint>`
+
+### QR Service
+- `http://localhost:8080/api/qr/<endpoint>`
+- `http://localhost:8080/qr/<endpoint>`
+
+> Replace `<endpoint>` with the actual controller path (see Swagger below).
+
+---
+
+## Swagger / OpenAPI (via Gateway)
+
+### Aggregated Swagger UI (all services)
+- `http://localhost:8080/swagger-ui.html`
+- `http://localhost:8080/swagger-ui/index.html`
+
+Springdoc commonly serves OpenAPI JSON at `/v3/api-docs` and Swagger UI via `/swagger-ui...` when enabled. :contentReference[oaicite:1]{index=1}
+
+### OpenAPI JSON (per service, proxied through Gateway)
+- `http://localhost:8080/auth/v3/api-docs`
+- `http://localhost:8080/users/v3/api-docs`
+- `http://localhost:8080/inventory/v3/api-docs`
+- `http://localhost:8080/qr/v3/api-docs`
+
+### Gateway’s own OpenAPI JSON (if enabled)
+- `http://localhost:8080/v3/api-docs`
+
+> Your gateway can aggregate multiple downstream OpenAPI specs using `springdoc.swagger-ui.urls`. :contentReference[oaicite:2]{index=2}
+
+---
+
+## How to get the full list of endpoints
+Open:
+- `http://localhost:8080/swagger-ui.html`
+
+Then pick each service in the dropdown to see **all endpoints + request/response models**.

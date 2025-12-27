@@ -11,25 +11,30 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import lombok.extern.slf4j.Slf4j;
 
 @Configuration
 @RequiredArgsConstructor
+@Slf4j
 public class ApplicationConfig {
 
     private final CustomUserDetailsService userDetailsService;
 
     @Bean
     public UserDetailsService userDetailsService() {
+        log.debug("Creating UserDetailsService bean");
         return userDetailsService;
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+        log.debug("Creating PasswordEncoder bean (BCrypt)");
         return new BCryptPasswordEncoder();
     }
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
+        log.debug("Creating AuthenticationProvider bean (DaoAuthenticationProvider)");
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService());
         authProvider.setPasswordEncoder(passwordEncoder());
@@ -38,6 +43,7 @@ public class ApplicationConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        log.debug("Creating AuthenticationManager bean");
         return config.getAuthenticationManager();
     }
 }

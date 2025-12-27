@@ -11,32 +11,88 @@ spring:
 
   cloud:
     gateway:
-      # Keep your real routes here
       routes:
+        # --------------------
+        # USER SERVICE
+        # --------------------
+        - id: user-service-api
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - StripPrefix=2
+
         - id: user-service
           uri: lb://user-service
           predicates:
-            - Path=/api/users/**,/users/**
+            - Path=/users/**
           filters:
             - StripPrefix=1
+
+        # --------------------
+        # INVENTORY SERVICE
+        # --------------------
+        - id: inventory-service-api
+          uri: lb://inventory-service
+          predicates:
+            - Path=/api/inventory/**
+          filters:
+            - StripPrefix=2
 
         - id: inventory-service
           uri: lb://inventory-service
           predicates:
-            - Path=/api/inventory/**,/inventory/**
+            - Path=/inventory/**
           filters:
             - StripPrefix=1
+
+        # --------------------
+        # QR SERVICE
+        # --------------------
+        - id: qr-service-api
+          uri: lb://qr-service
+          predicates:
+            - Path=/api/qr/**
+          filters:
+            - StripPrefix=2
 
         - id: qr-service
           uri: lb://qr-service
           predicates:
-            - Path=/api/qr/**,/qr/**
+            - Path=/qr/**
           filters:
             - StripPrefix=1
+
+        # --------------------
+        # AUTH SERVICE
+        # --------------------
+        - id: auth-service-api
+          uri: lb://auth-service
+          predicates:
+            - Path=/api/auth/**
+          filters:
+            - StripPrefix=2
 
         - id: auth-service
           uri: lb://auth-service
           predicates:
-            - Path=/api/auth/**,/auth/**
+            - Path=/auth/**
           filters:
             - StripPrefix=1
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    disable-swagger-default-url: true
+    urls:
+      - name: auth-service
+        url: /auth/v3/api-docs
+      - name: user-service
+        url: /users/v3/api-docs
+      - name: inventory-service
+        url: /inventory/v3/api-docs
+      - name: qr-service
+        url: /qr/v3/api-docs

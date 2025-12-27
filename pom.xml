@@ -26,8 +26,10 @@
         <lombok.version>1.18.32</lombok.version>
     </properties>
 
+    <!-- ✅ VERSION MANAGEMENT ONLY -->
     <dependencyManagement>
         <dependencies>
+            <!-- Spring Cloud BOM: manages versions for all spring-cloud-* deps -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -35,20 +37,31 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-devtools</artifactId>
-                <scope>runtime</scope>
-                <optional>true</optional>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-config</artifactId>
-            </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <!-- ✅ ACTUAL DEPENDENCIES THAT CHILD MODULES WILL INHERIT -->
+    <dependencies>
+        <!-- Option B: all modules inherit config client -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+
+        <!-- Optional but common: allows /actuator/refresh, etc. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- Devtools: will only activate in dev, but inherited by all modules -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 
     <modules>
         <module>common-lib</module>
@@ -58,6 +71,8 @@
         <module>user-service</module>
         <module>inventory-service</module>
         <module>qr-service</module>
+        <!-- you had auth-service earlier; include it if it exists -->
+        <!-- <module>auth-service</module> -->
     </modules>
 
     <build>
@@ -89,4 +104,5 @@
             </plugins>
         </pluginManagement>
     </build>
+
 </project>

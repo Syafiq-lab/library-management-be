@@ -1,6 +1,15 @@
-#service-service-registry
+# service-registry/src/main/resources/application.yml
+server:
+  port: 8761
+
 spring:
   application:
     name: service-registry
   config:
-    import: "optional:configserver:http://localhost:8888"
+    # IMPORTANT: prevents the import-check failure if config client is on the classpath
+    import: "optional:configserver:"
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false

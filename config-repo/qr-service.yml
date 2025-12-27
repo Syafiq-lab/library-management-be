@@ -6,7 +6,6 @@ spring:
   application:
     name: qr-service
 
-  # Keep stream bindings here if QR publishes/consumes events
   cloud:
     stream:
       bindings:

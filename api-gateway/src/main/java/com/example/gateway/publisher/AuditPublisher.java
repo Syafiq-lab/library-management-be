@@ -2,6 +2,7 @@ package com.example.gateway.publisher;
 
 import com.example.common.event.EventEnvelope;
 import com.example.gateway.event.AuditEvent;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 
+@Slf4j
 @Service
 public class AuditPublisher {
 
@@ -22,9 +24,17 @@ public class AuditPublisher {
 						int responseStatusCode,
 						String traceId) {
 
+		HttpStatus resolved = HttpStatus.resolve(responseStatusCode);
+		String statusForLog = (resolved != null) ? resolved.toString() : String.valueOf(responseStatusCode);
+
+		String method = (request != null && request.getMethod() != null) ? request.getMethod().name() : null;
+		String path = (request != null && request.getURI() != null) ? request.getURI().getPath() : null;
+
+		log.debug("Preparing audit event traceId={}, method={}, path={}, status={}", traceId, method, path, statusForLog);
+
 		AuditEvent event = AuditEvent.builder()
-				.path(request.getURI().getPath())
-				.method(request.getMethod() != null ? request.getMethod().name() : "UNKNOWN")
+				.path(path)
+				.method(method)
 				.statusCode(responseStatusCode)
 				.timestamp(Instant.now())
 				.build();
@@ -40,6 +50,11 @@ public class AuditPublisher {
 				traceId                     // traceId
 		);
 
-		streamBridge.send("audit-out-0", envelope);
+		boolean sent = streamBridge.send("audit-out-0", envelope);
+		if (sent) {
+			log.debug("Audit event sent to binding audit-out-0 traceId={} status={}", traceId, statusForLog);
+		} else {
+			log.warn("Failed to send audit event to binding audit-out-0 traceId={} status={}", traceId, statusForLog);
+		}
 	}
 }

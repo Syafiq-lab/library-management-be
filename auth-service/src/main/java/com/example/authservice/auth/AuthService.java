@@ -22,9 +22,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.AuthenticationException;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthService {
 
     private final UserRepository userRepository;
@@ -35,8 +38,11 @@ public class AuthService {
 
     @Transactional
     public AuthResponse register(RegisterRequest request) {
+        String emailForLog = request.getEmail() == null ? null : request.getEmail().toLowerCase(Locale.ROOT);
+        log.debug("Register attempt email={}", emailForLog);
         String email = request.getEmail().toLowerCase(Locale.ROOT);
         if (userRepository.existsByEmail(email)) {
+            log.warn("Register rejected: email already in use email={}", email);
             throw new IllegalArgumentException("Email already in use");
         }
 
@@ -52,6 +58,8 @@ public class AuthService {
 
         userRepository.save(user);
 
+        log.info("User registered email={} id={} role={}", user.getEmail(), user.getId(), user.getRole());
+
         UserDetails userDetails = buildUserDetails(user);
         String accessToken = jwtService.generateAccessToken(userDetails);
         String refreshToken = createAndStoreRefreshToken(user);
@@ -61,19 +69,27 @@ public class AuthService {
 
     @Transactional
     public AuthResponse authenticate(AuthRequest request) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
-        );
-
-        if (!authentication.isAuthenticated()) {
+        Authentication authentication;
+try {
+    log.debug("Authentication attempt email={}", request.getEmail());
+    authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(
+                    request.getEmail(),
+                    request.getPassword()
+            )
+    );
+} catch (AuthenticationException ex) {
+    log.warn("Authentication failed email={} reason={}", request.getEmail(), ex.getMessage());
+    throw ex;
+}
+if (!authentication.isAuthenticated()) {
+            log.warn("Authentication rejected: invalid credentials email={}", request.getEmail());
             throw new IllegalArgumentException("Invalid credentials");
         }
 
         User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        log.info("Authentication success email={} userId={} role={}", user.getEmail(), user.getId(), user.getRole());
 
         UserDetails userDetails = buildUserDetails(user);
         String accessToken = jwtService.generateAccessToken(userDetails);
@@ -84,15 +100,21 @@ public class AuthService {
 
     @Transactional
     public AuthResponse refresh(String refreshTokenValue) {
+        log.debug("Refresh attempt tokenPresent={} tokenLength={}", refreshTokenValue != null, refreshTokenValue == null ? 0 : refreshTokenValue.length());
         if (!jwtService.isRefreshToken(refreshTokenValue)) {
+            log.warn("Refresh rejected: not a refresh token");
             throw new IllegalArgumentException("Invalid token type");
         }
 
         RefreshToken refreshToken = refreshTokenRepository
                 .findByTokenAndRevokedFalse(refreshTokenValue)
-                .orElseThrow(() -> new IllegalArgumentException("Refresh token not found or revoked"));
+                .orElseThrow(() -> {
+                    log.warn("Refresh rejected: token not found or revoked");
+                    return new IllegalArgumentException("Refresh token not found or revoked");
+                });
 
         if (refreshToken.getExpiryDate().isBefore(Instant.now())) {
+            log.warn("Refresh rejected: token expired userId={}", refreshToken.getUser() == null ? null : refreshToken.getUser().getId());
             throw new IllegalArgumentException("Refresh token expired");
         }
 
@@ -105,14 +127,17 @@ public class AuthService {
         refreshTokenRepository.save(refreshToken);
         String newRefreshTokenValue = createAndStoreRefreshToken(user);
 
+        log.info("Refresh success email={} userId={}", user.getEmail(), user.getId());
         return new AuthResponse(accessToken, newRefreshTokenValue);
     }
 
     @Transactional
     public void logout(String refreshTokenValue) {
+        log.debug("Logout attempt tokenPresent={} tokenLength={}", refreshTokenValue != null, refreshTokenValue == null ? 0 : refreshTokenValue.length());
         refreshTokenRepository.findByTokenAndRevokedFalse(refreshTokenValue)
                 .ifPresent(token -> {
                     token.setRevoked(true);
+                    log.info("Logout success: refresh token revoked userId={}", token.getUser() == null ? null : token.getUser().getId());
                     refreshTokenRepository.save(token);
                 });
     }
@@ -121,6 +146,8 @@ public class AuthService {
         Instant expiry = Instant.now().plus(7, ChronoUnit.DAYS);
         UserDetails userDetails = buildUserDetails(user);
         String rawToken = jwtService.generateRefreshToken(userDetails);
+
+        log.debug("Issued refresh token userId={} expiresAt={}", user.getId(), expiry);
 
         RefreshToken refreshToken = RefreshToken.builder()
                 .token(rawToken)

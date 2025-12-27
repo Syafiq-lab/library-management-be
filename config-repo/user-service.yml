@@ -5,8 +5,3 @@ server:
 spring:
   application:
     name: user-service
-
-  # Optional override (only if you really want it different from global):
-  # jpa:
-  #   hibernate:
-  #     ddl-auto: create-drop
