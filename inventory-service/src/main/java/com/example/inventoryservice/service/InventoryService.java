@@ -5,9 +5,9 @@ import com.example.inventoryservice.domain.InventoryItem;
 import com.example.inventoryservice.mapping.InventoryItemMapper;
 import com.example.inventoryservice.publisher.InventoryEventPublisher;
 import com.example.inventoryservice.repository.InventoryItemRepository;
-import com.example.inventoryservice.web.dto.InventoryItemCreateRequest;
-import com.example.inventoryservice.web.dto.InventoryItemResponse;
-import com.example.inventoryservice.web.dto.InventoryItemUpdateRequest;
+import com.example.inventoryservice.dto.InventoryItemCreateRequest;
+import com.example.inventoryservice.dto.InventoryItemResponse;
+import com.example.inventoryservice.dto.InventoryItemUpdateRequest;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,10 +15,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 @RequiredArgsConstructor
 public class InventoryService {
+
+	private static final Logger log = LoggerFactory.getLogger(InventoryService.class);
+
 
     private final InventoryItemRepository repository;
     private final InventoryItemMapper mapper;

@@ -1,9 +1,9 @@
 package com.example.userservice.web;
 
 import com.example.userservice.service.UserService;
-import com.example.userservice.web.dto.UserCreateRequest;
-import com.example.userservice.web.dto.UserResponse;
-import com.example.userservice.web.dto.UserUpdateRequest;
+import com.example.userservice.dto.UserCreateRequest;
+import com.example.userservice.dto.UserResponse;
+import com.example.userservice.dto.UserUpdateRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

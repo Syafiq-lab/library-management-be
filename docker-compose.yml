@@ -8,7 +8,7 @@ x-spring-common-env: &spring-common-env
   SPRING_PROFILES_ACTIVE: docker
   CONFIG_SERVER_URL: http://config-server:8888
   EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
-
+  JWT_SECRET: ${JWT_SECRET:-local}
 
 services:
   # -------------------------
@@ -144,25 +144,30 @@ services:
         condition: service_healthy
     environment:
       <<: *spring-common-env
-    logging: *default-logging
 
+      # ====== HOT RELOAD SETTINGS (added) ======
+      # Allow DevTools detection inside container
+      SPRING_DEVTOOLS_RESTART_ENABLED: "true"
+      SPRING_DEVTOOLS_LIVERELOAD_ENABLED: "false"
+      JAVA_TOOL_OPTIONS: >-
+        -Dspring.devtools.restart.poll-interval=2s
+        -Dspring.devtools.restart.quiet-period=1s
+
+    # Important: run via maven so DevTools works
+    command: ["mvn", "-q", "-DskipTests", "spring-boot:run"]
+
+    logging: *default-logging
 
   auth-service:
     build:
       context: ./auth-service
       target: dev
     working_dir: /workspace/auth-service
-
     volumes:
-      # If auth-service depends on other modules, keep your old ".:/workspace"
       - ./:/workspace
-      # (optional faster) If standalone, use:
-      # - ./auth-service:/workspace/auth-service
       - m2-cache:/root/.m2
-
     ports:
       - "8090:8090"
-
     depends_on:
       maven-install:
         condition: service_completed_successfully
@@ -178,26 +183,24 @@ services:
     environment:
       <<: *spring-common-env
 
-      # ✅ override your common env that disables devtools
+      # ====== HOT RELOAD SETTINGS (added) ======
       SPRING_DEVTOOLS_RESTART_ENABLED: "true"
+      SPRING_PROFILES_ACTIVE: docker
       SPRING_DEVTOOLS_LIVERELOAD_ENABLED: "false"
-
-      # ✅ helps on Windows/Docker Desktop file watching
       JAVA_TOOL_OPTIONS: >-
         -Dspring.devtools.restart.poll-interval=2s
         -Dspring.devtools.restart.quiet-period=1s
 
-    # ✅ IMPORTANT for reload: run via maven, not java -jar
-    command: [ "mvn", "-q", "-DskipTests", "spring-boot:run" ]
+    # Important: run via maven so DevTools works
+    command: ["mvn", "-q", "-DskipTests", "spring-boot:run"]
 
     healthcheck:
-      test: [ "CMD-SHELL", "curl -fsS http://127.0.0.1:8090/actuator/health >/dev/null || exit 1" ]
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8090/actuator/health >/dev/null || exit 1"]
       interval: 5s
       timeout: 3s
       retries: 60
 
     logging: *default-logging
-
 
   user-service:
     build:
@@ -222,6 +225,16 @@ services:
         condition: service_healthy
     environment:
       <<: *spring-common-env
+
+      # ====== HOT RELOAD SETTINGS (added) ======
+      SPRING_DEVTOOLS_RESTART_ENABLED: "true"
+      SPRING_DEVTOOLS_LIVERELOAD_ENABLED: "false"
+      JAVA_TOOL_OPTIONS: >-
+        -Dspring.devtools.restart.poll-interval=2s
+        -Dspring.devtools.restart.quiet-period=1s
+
+    command: ["mvn", "-q", "-DskipTests", "spring-boot:run"]
+
     logging: *default-logging
 
   inventory-service:
@@ -247,6 +260,16 @@ services:
         condition: service_healthy
     environment:
       <<: *spring-common-env
+
+      # ====== HOT RELOAD SETTINGS (added) ======
+      SPRING_DEVTOOLS_RESTART_ENABLED: "true"
+      SPRING_DEVTOOLS_LIVERELOAD_ENABLED: "false"
+      JAVA_TOOL_OPTIONS: >-
+        -Dspring.devtools.restart.poll-interval=2s
+        -Dspring.devtools.restart.quiet-period=1s
+
+    command: ["mvn", "-q", "-DskipTests", "spring-boot:run"]
+
     logging: *default-logging
 
   qr-service:
@@ -272,6 +295,16 @@ services:
         condition: service_healthy
     environment:
       <<: *spring-common-env
+
+      # ====== HOT RELOAD SETTINGS (added) ======
+      SPRING_DEVTOOLS_RESTART_ENABLED: "true"
+      SPRING_DEVTOOLS_LIVERELOAD_ENABLED: "false"
+      JAVA_TOOL_OPTIONS: >-
+        -Dspring.devtools.restart.poll-interval=2s
+        -Dspring.devtools.restart.quiet-period=1s
+
+    command: ["mvn", "-q", "-DskipTests", "spring-boot:run"]
+
     logging: *default-logging
 
   # -------- Observability / UI --------

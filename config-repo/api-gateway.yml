@@ -1,4 +1,3 @@
-# config-repo/api-gateway.yml
 server:
   port: 8080
 
@@ -11,74 +10,76 @@ spring:
 
   cloud:
     gateway:
-      routes:
-        # --------------------
-        # USER SERVICE
-        # --------------------
-        - id: user-service-api
-          uri: lb://user-service
-          predicates:
-            - Path=/api/users/**
-          filters:
-            - StripPrefix=2
+      server:
+        webflux:
+          routes:
+            # --------------------
+            # USER SERVICE
+            # --------------------
+            - id: user-service-api
+              uri: lb://user-service
+              predicates:
+                - Path=/api/users/**
+              filters:
+                - StripPrefix=2
 
-        - id: user-service
-          uri: lb://user-service
-          predicates:
-            - Path=/users/**
-          filters:
-            - StripPrefix=1
+            - id: user-service
+              uri: lb://user-service
+              predicates:
+                - Path=/users/**
+              filters:
+                - StripPrefix=1
 
-        # --------------------
-        # INVENTORY SERVICE
-        # --------------------
-        - id: inventory-service-api
-          uri: lb://inventory-service
-          predicates:
-            - Path=/api/inventory/**
-          filters:
-            - StripPrefix=2
+            # --------------------
+            # INVENTORY SERVICE
+            # --------------------
+            - id: inventory-service-api
+              uri: lb://inventory-service
+              predicates:
+                - Path=/api/inventory/**
+              filters:
+                - StripPrefix=2
 
-        - id: inventory-service
-          uri: lb://inventory-service
-          predicates:
-            - Path=/inventory/**
-          filters:
-            - StripPrefix=1
+            - id: inventory-service
+              uri: lb://inventory-service
+              predicates:
+                - Path=/inventory/**
+              filters:
+                - StripPrefix=1
 
-        # --------------------
-        # QR SERVICE
-        # --------------------
-        - id: qr-service-api
-          uri: lb://qr-service
-          predicates:
-            - Path=/api/qr/**
-          filters:
-            - StripPrefix=2
+            # --------------------
+            # QR SERVICE
+            # --------------------
+            - id: qr-service-api
+              uri: lb://qr-service
+              predicates:
+                - Path=/api/qr/**
+              filters:
+                - StripPrefix=2
 
-        - id: qr-service
-          uri: lb://qr-service
-          predicates:
-            - Path=/qr/**
-          filters:
-            - StripPrefix=1
+            - id: qr-service
+              uri: lb://qr-service
+              predicates:
+                - Path=/qr/**
+              filters:
+                - StripPrefix=1
 
-        # --------------------
-        # AUTH SERVICE
-        # --------------------
-        - id: auth-service-api
-          uri: lb://auth-service
-          predicates:
-            - Path=/api/auth/**
-          filters:
-            - StripPrefix=2
+            # --------------------
+            # AUTH SERVICE
+            # --------------------
+            - id: auth-service-api
+              uri: lb://auth-service
+              predicates:
+                - Path=/api/auth/**
+              filters:
+                - StripPrefix=2
 
-        - id: auth-service
-          uri: lb://auth-service
-          predicates:
-            - Path=/auth/**
-          filters:
-            - StripPrefix=1
+            - id: auth-service
+              uri: lb://auth-service
+              predicates:
+                - Path=/auth/**
+              filters:
+                - StripPrefix=1
 
 springdoc:
   api-docs:

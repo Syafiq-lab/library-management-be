@@ -4,45 +4,60 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c967622-21db-46f0-b34d-2bf0dd5f5b25" name="Changes" comment="">
+    <list default="true" id="4c967622-21db-46f0-b34d-2bf0dd5f5b25" name="Changes" comment="check auth ang api gateway">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/detekt.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/example/gateway/ApiGatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/example/gateway/ApiGatewayApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/example/gateway/FallbackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/example/gateway/FallbackController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/example/gateway/config/GatewayConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/example/gateway/config/GatewayConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/example/gateway/event/AuditEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/example/gateway/event/AuditEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/example/gateway/publisher/AuditPublisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/example/gateway/publisher/AuditPublisher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/config/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/config/ApplicationConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/security/jwt/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/security/jwt/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/security/jwt/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/security/jwt/JwtService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-lib/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-lib/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/example/common/error/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-lib/src/main/java/com/example/common/error/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/example/common/event/AuditEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-lib/src/main/java/com/example/common/event/AuditEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/example/common/event/EventEnvelope.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-lib/src/main/java/com/example/common/event/EventEnvelope.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/example/common/messaging/BaseEventPublisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-lib/src/main/java/com/example/common/messaging/BaseEventPublisher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config-repo/api-gateway.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/api-gateway.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/application-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/application-docker.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config-repo/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config-repo/auth-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/auth-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/qr-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/qr-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/service-registry.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/service-registry.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/user-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/user-service.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/client/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/client/UserClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/event/InventoryEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/event/InventoryEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/event/InventoryEventType.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/event/InventoryEventType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/mapping/InventoryItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/mapping/InventoryItemMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/publisher/InventoryEventPublisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/publisher/InventoryEventPublisher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/repository/InventoryItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/repository/InventoryItemRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/service/InventoryItemNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/service/InventoryItemNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/service/InventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/service/InventoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/web/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/web/InventoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/web/dto/InventoryItemCreateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/dto/InventoryItemCreateRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/web/dto/InventoryItemResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/dto/InventoryItemResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/web/dto/InventoryItemUpdateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/dto/InventoryItemUpdateRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qr-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/qr-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/qr-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/qr-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service-registry/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/service-registry/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service-registry/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/service-registry/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/domain/QrCodeRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/domain/QrCodeRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/event/QrDecodedEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/event/QrDecodedEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/event/QrGeneratedEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/event/QrGeneratedEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/repository/QrCodeRecordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/repository/QrCodeRecordRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/service/QrService.java" beforeDir="false" afterPath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/service/QrService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/web/QrController.java" beforeDir="false" afterPath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/web/QrController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/web/dto/QrDecodeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/dto/QrDecodeRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/web/dto/QrDecodeResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/dto/QrDecodeResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/web/dto/QrGenerateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/dto/QrGenerateRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/web/dto/QrGenerateResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/qr-service/src/main/java/com/example/qrservice/dto/QrGenerateResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/domain/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/event/UserCreatedEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/event/UserCreatedEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/event/UserUpdatedEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/event/UserUpdatedEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/mapping/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/mapping/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/messaging/UserEventPublisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/messaging/UserEventPublisher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/service/UserNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-lib/src/main/java/com/example/common/exception/UserNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/web/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/web/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/web/UserExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/web/UserExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/web/dto/UserCreateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/dto/UserCreateRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/web/dto/UserResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/dto/UserResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/web/dto/UserUpdateRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/dto/UserUpdateRequest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,15 +65,22 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="142" />
+    <option name="cachedIndexableFilesCount" value="156" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
@@ -88,7 +110,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/OneDrive/Project/SIRMS/library-management-be/config-server/src/main/resources",
+    "last_opened_file_path": "C:/OneDrive/Project/SIRMS/library-management-be/config-repo",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -104,15 +126,16 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\OneDrive\Project\SIRMS\library-management-be\config-server\src\main\resources" />
       <recent name="C:\OneDrive\Project\SIRMS\library-management-be\config-repo" />
+      <recent name="C:\OneDrive\Project\SIRMS\library-management-be\security-lib" />
+      <recent name="C:\OneDrive\Project\SIRMS\library-management-be\config-server\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\OneDrive\Project\SIRMS\library-management-be\auth-service\src\main\java\com\example\authservice\security\jwt" />
-      <recent name="C:\OneDrive\Project\SIRMS\library-management-be\auth-service\src\main\java\com\example\authservice\config" />
-      <recent name="C:\OneDrive\Project\SIRMS\library-management-be\auth-service\src\main\java\com\example\authservice\auth" />
-      <recent name="C:\OneDrive\Project\SIRMS\library-management-be\api-gateway\src\main\java\com\example\gateway" />
-      <recent name="C:\OneDrive\Project\SIRMS\library-management-be\api-gateway\src\main\java\com\example\gateway\publisher" />
+      <recent name="C:\OneDrive\Project\SIRMS\library-management-be\common-lib\src\main\java\com\example\common\error" />
+      <recent name="C:\OneDrive\Project\SIRMS\library-management-be\common-lib\src\main\java\com\example\common\event" />
+      <recent name="C:\OneDrive\Project\SIRMS\library-management-be\common-lib\src\main\java\com\example\common\messaging" />
+      <recent name="C:\OneDrive\Project\SIRMS\library-management-be\user-service\src\main\java\com\example\userservice\event" />
+      <recent name="C:\OneDrive\Project\SIRMS\library-management-be\user-service\src\main\java\com\example\userservice\service" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -126,6 +149,14 @@
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="api-gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.gateway.ApiGatewayApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="auth-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.authservice.AuthServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -145,7 +176,9 @@
       </method>
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
-      <deployment type="docker-compose.yml" />
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
       <method v="2" />
     </configuration>
     <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" singleton="false" temporary="true" server-name="Docker">
@@ -195,12 +228,37 @@
       <workItem from="1766599809859" duration="1036000" />
       <workItem from="1766737464105" duration="27326000" />
       <workItem from="1766825414255" duration="26000" />
-      <workItem from="1766825473526" duration="8601000" />
+      <workItem from="1766825473526" duration="13190000" />
+      <workItem from="1766869192932" duration="24867000" />
     </task>
+    <task id="LOCAL-00001" summary="check auth ang api gateway">
+      <option name="closed" value="true" />
+      <created>1766839904482</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1766839904482</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="check auth ang api gateway" />
+    <option name="LAST_COMMIT_MESSAGE" value="check auth ang api gateway" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/inventory-service/src/main/java/com/example/inventoryservice/web/InventoryExceptionHandler.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

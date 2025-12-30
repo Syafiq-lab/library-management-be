@@ -8,6 +8,5 @@ spring:
 
 security:
   jwt:
-    secret: local
     expiration-ms: 900000
     refresh-expiration-ms: 604800000

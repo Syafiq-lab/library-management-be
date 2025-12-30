@@ -6,12 +6,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class InventoryEvent {
+
+	private static final Logger log = LoggerFactory.getLogger(InventoryEvent.class);
+
 
 	private String eventId;
 	private InventoryEventType eventType;

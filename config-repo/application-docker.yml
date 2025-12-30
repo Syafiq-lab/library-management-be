@@ -1,4 +1,5 @@
 # config-repo/application-docker.yml
+
 eureka:
   client:
     service-url:
@@ -12,12 +13,41 @@ spring:
 
   kafka:
     bootstrap-servers: kafka:9092
+  security:
+    filter:
+      permitAll:
+        - /v3/api-docs/**
+        - /swagger-ui.html
+        - /swagger-ui/**
+        - /webjars/**
+        - /favicon.ico
+        - /actuator/health
 
-  # ----------------------------
-  # Logging
-  # ----------------------------
 logging:
   level:
     com.example: DEBUG
     org.springframework: INFO
     reactor.netty: INFO
+
+security:
+  shared:
+    permit-all:
+      - /actuator/**
+      - /v3/api-docs/**
+      - /swagger-ui.html
+      - /swagger-ui/**
+      - /webjars/**
+      - /favicon.ico
+
+      # ✅ IMPORTANT: allow docs behind gateway prefixes
+      - /auth/v3/api-docs
+      - /auth/v3/api-docs/**
+      - /users/v3/api-docs
+      - /users/v3/api-docs/**
+      - /inventory/v3/api-docs
+      - /inventory/v3/api-docs/**
+      - /qr/v3/api-docs
+      - /qr/v3/api-docs/**
+
+      # keep if you want login/register public
+      - /api/auth/**

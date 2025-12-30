@@ -65,15 +65,16 @@
 
     <modules>
         <module>common-lib</module>
+        <module>security-lib</module>
         <module>service-registry</module>
         <module>config-server</module>
         <module>api-gateway</module>
         <module>user-service</module>
         <module>inventory-service</module>
         <module>qr-service</module>
-        <!-- you had auth-service earlier; include it if it exists -->
-        <!-- <module>auth-service</module> -->
+        <module>auth-service</module>
     </modules>
+
 
     <build>
         <pluginManagement>

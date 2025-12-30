@@ -6,7 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
+import lombok.ToString;
 
+@ToString(exclude = "payload")
 @Data
 @Builder
 @NoArgsConstructor

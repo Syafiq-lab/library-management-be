@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
+import lombok.ToString;
 
+@ToString(exclude = "payload")
 @Entity
 @Table(name = "qr_codes")
 @Getter

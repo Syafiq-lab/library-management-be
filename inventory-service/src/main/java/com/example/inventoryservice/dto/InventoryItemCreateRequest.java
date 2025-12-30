@@ -1,4 +1,4 @@
-package com.example.inventoryservice.web.dto;
+package com.example.inventoryservice.dto;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -9,7 +9,7 @@ import lombok.Value;
 import java.math.BigDecimal;
 
 @Value
-public class InventoryItemUpdateRequest {
+public class InventoryItemCreateRequest {
 
     @NotBlank
     String name;
@@ -20,4 +20,7 @@ public class InventoryItemUpdateRequest {
     @NotNull
     @Positive
     BigDecimal unitPrice;
+
+    @NotNull
+    Long ownerUserId;
 }

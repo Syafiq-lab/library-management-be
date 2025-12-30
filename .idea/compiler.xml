@@ -2,20 +2,6 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile name="Annotation profile for advanced-microservices-backend" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.6.3/mapstruct-processor-1.6.3.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
-        </processorPath>
-        <module name="api-gateway" />
-        <module name="config-server" />
-        <module name="common-lib" />
-        <module name="qr-service" />
-        <module name="service-registry" />
-      </profile>
       <profile name="Annotation profile for inventory-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -38,15 +24,33 @@
         </processorPath>
         <module name="user-service" />
       </profile>
+      <profile name="Annotation profile for advanced-microservices-backend" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.6.3/mapstruct-processor-1.6.3.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.32/lombok-1.18.32.jar" />
+        </processorPath>
+        <module name="config-server" />
+        <module name="auth-service" />
+        <module name="security-lib" />
+        <module name="qr-service" />
+        <module name="api-gateway" />
+        <module name="common-lib" />
+        <module name="service-registry" />
+      </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters -parameters" />
+      <module name="auth-service" options="-parameters -parameters" />
       <module name="common-lib" options="-parameters -parameters" />
       <module name="config-server" options="-parameters -parameters" />
       <module name="inventory-service" options="-parameters -parameters" />
       <module name="qr-service" options="-parameters -parameters" />
+      <module name="security-lib" options="-parameters -parameters" />
       <module name="service-registry" options="-parameters -parameters" />
       <module name="user-service" options="-parameters -parameters" />
     </option>

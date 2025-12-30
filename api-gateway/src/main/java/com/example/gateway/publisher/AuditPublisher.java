@@ -40,14 +40,12 @@ public class AuditPublisher {
 				.build();
 
 		EventEnvelope<AuditEvent> envelope = EventEnvelope.success(
-				"AUDIT_HTTP_CALL",          // eventName
-				"GATEWAY",                  // aggregateType
-				null,                       // aggregateId not always needed here
-				"HTTP request audited",     // message
-				HttpStatus.OK,              // semantic status of the event itself
-				event,                      // payload
-				"api-gateway",              // sourceService
-				traceId                     // traceId
+				"AUDIT_HTTP_CALL",  // eventName
+				"GATEWAY",          // aggregateType
+				null,               // aggregateId
+				event,              // payload
+				"api-gateway",      // sourceService
+				traceId             // traceId
 		);
 
 		boolean sent = streamBridge.send("audit-out-0", envelope);

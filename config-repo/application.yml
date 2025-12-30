@@ -80,3 +80,16 @@ springdoc:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
+
+# ----------------------------
+# security-lib (NON-DOCKER: health only)
+# ----------------------------
+security:
+  jwt:
+    # Use env var if present; fallback for local dev
+    secret: ${JWT_SECRET:local}
+
+  shared:
+    # Health only in non-docker
+    permit-all:
+      - /actuator/health

@@ -1,10 +1,10 @@
 package com.example.qrservice.web;
 
 import com.example.qrservice.service.QrService;
-import com.example.qrservice.web.dto.QrDecodeRequest;
-import com.example.qrservice.web.dto.QrDecodeResponse;
-import com.example.qrservice.web.dto.QrGenerateRequest;
-import com.example.qrservice.web.dto.QrGenerateResponse;
+import com.example.qrservice.dto.QrDecodeRequest;
+import com.example.qrservice.dto.QrDecodeResponse;
+import com.example.qrservice.dto.QrGenerateRequest;
+import com.example.qrservice.dto.QrGenerateResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/qr")
 @RequiredArgsConstructor
@@ -29,7 +31,14 @@ public class QrController {
     @Operation(summary = "Generate a QR code for the given payload")
     public ResponseEntity<QrGenerateResponse> generate(
             @Validated @RequestBody QrGenerateRequest request) {
-        return ResponseEntity.ok(qrService.generate(request));
+        
+        String payload = request.getPayload();
+        log.debug("QR generate requested: type={}, size={}, payloadLen={}, payloadHash={}",
+                request.getType(),
+                request.getSize(),
+                payload == null ? 0 : payload.length(),
+                QrService.safeHash(payload));
+return ResponseEntity.ok(qrService.generate(request));
     }
 
     @PostMapping(
@@ -40,6 +49,9 @@ public class QrController {
     @Operation(summary = "Decode a QR code image (Base64 PNG)")
     public ResponseEntity<QrDecodeResponse> decode(
             @Validated @RequestBody QrDecodeRequest request) {
-        return ResponseEntity.ok(qrService.decode(request));
+        
+        String img = request.getImageBase64();
+        log.debug("QR decode requested: imageBase64Len={}", img == null ? 0 : img.length());
+return ResponseEntity.ok(qrService.decode(request));
     }
 }

@@ -1,4 +1,4 @@
-package com.example.qrservice.web.dto;
+package com.example.qrservice.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

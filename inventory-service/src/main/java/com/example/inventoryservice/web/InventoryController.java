@@ -2,9 +2,9 @@ package com.example.inventoryservice.web;
 
 import com.example.common.api.PageResponse;
 import com.example.inventoryservice.service.InventoryService;
-import com.example.inventoryservice.web.dto.InventoryItemCreateRequest;
-import com.example.inventoryservice.web.dto.InventoryItemResponse;
-import com.example.inventoryservice.web.dto.InventoryItemUpdateRequest;
+import com.example.inventoryservice.dto.InventoryItemCreateRequest;
+import com.example.inventoryservice.dto.InventoryItemResponse;
+import com.example.inventoryservice.dto.InventoryItemUpdateRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -14,12 +14,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @RequestMapping("/api/inventory")
 @RequiredArgsConstructor
 @Tag(name = "Inventory", description = "Inventory management APIs")
 public class InventoryController {
+
+	private static final Logger log = LoggerFactory.getLogger(InventoryController.class);
+
 
     private final InventoryService service;
 

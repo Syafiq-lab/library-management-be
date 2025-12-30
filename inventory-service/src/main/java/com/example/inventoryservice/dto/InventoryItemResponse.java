@@ -1,4 +1,4 @@
-package com.example.inventoryservice.web.dto;
+package com.example.inventoryservice.dto;
 
 import lombok.Builder;
 import lombok.Value;

@@ -1,9 +1,9 @@
 package com.example.userservice.mapping;
 
 import com.example.userservice.domain.User;
-import com.example.userservice.web.dto.UserCreateRequest;
-import com.example.userservice.web.dto.UserResponse;
-import com.example.userservice.web.dto.UserUpdateRequest;
+import com.example.userservice.dto.UserCreateRequest;
+import com.example.userservice.dto.UserResponse;
+import com.example.userservice.dto.UserUpdateRequest;
 import org.mapstruct.*;
 
 import java.time.Instant;

@@ -1,7 +1,7 @@
 package com.example.userservice.web;
 
 import com.example.common.api.ErrorResponse;
-import com.example.userservice.service.UserNotFoundException;
+import com.example.common.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

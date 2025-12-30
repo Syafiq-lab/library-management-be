@@ -5,6 +5,9 @@ import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public abstract class BaseEventPublisher<T> {
 
 	private final StreamBridge streamBridge;
@@ -14,7 +17,16 @@ public abstract class BaseEventPublisher<T> {
 	}
 
 	protected void send(String bindingName, T payload) {
+		String payloadType = (payload == null) ? "null" : payload.getClass().getSimpleName();
+		log.debug("Sending event | binding={} | payloadType={}", bindingName, payloadType);
+
 		Message<T> message = MessageBuilder.withPayload(payload).build();
-		streamBridge.send(bindingName, message);
+		boolean sent = streamBridge.send(bindingName, message);
+
+		if (sent) {
+			log.debug("Event sent | binding={} | payloadType={}", bindingName, payloadType);
+		} else {
+			log.warn("Event send returned false | binding={} | payloadType={}", bindingName, payloadType);
+		}
 	}
 }

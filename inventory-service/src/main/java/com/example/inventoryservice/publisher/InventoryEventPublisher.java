@@ -8,9 +8,14 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.UUID;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class InventoryEventPublisher {
+
+	private static final Logger log = LoggerFactory.getLogger(InventoryEventPublisher.class);
+
 
 	private final StreamBridge streamBridge;
 
