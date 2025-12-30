@@ -1,0 +1,15 @@
+# config-repo/auth-service-docker.yml
+spring:
+  security:
+    filter:
+      permitAll:
+        # swagger and docs
+        - /v3/api-docs/**
+        - /swagger-ui/**
+        - /swagger-ui.html
+        # health & options
+        - /actuator/health
+        - /**/*.png
+        - /**/*.css
+        - /**/*.js
+

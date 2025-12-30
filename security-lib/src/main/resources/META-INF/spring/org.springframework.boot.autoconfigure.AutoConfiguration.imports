@@ -1,0 +1,10 @@
+com.example.commonlib.security.autoconfigure.PropertiesAutoConfiguration
+com.example.commonlib.security.autoconfigure.MethodSecurityAutoConfiguration
+com.example.commonlib.security.autoconfigure.JwtDecoderAutoConfiguration
+com.example.commonlib.security.autoconfigure.JwtAuthoritiesAutoConfiguration
+com.example.commonlib.security.autoconfigure.ServletCorsAutoConfiguration
+com.example.commonlib.security.autoconfigure.ReactiveCorsAutoConfiguration
+com.example.commonlib.security.autoconfigure.ServletResourceServerAutoConfiguration
+com.example.commonlib.security.autoconfigure.ReactiveResourceServerAutoConfiguration
+com.example.commonlib.security.autoconfigure.ReactiveJwtDecoderAutoConfiguration
+
