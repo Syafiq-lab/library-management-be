@@ -42,11 +42,12 @@ public class SecurityConfig {
 
                         // ✅ public endpoints
                         .requestMatchers(
-                                "/actuator/health",
+                                "/actuator/**", // Allow all actuator endpoints
                                 "/v3/api-docs/**",
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",
-                                "/api/auth/**"
+                                "/api/auth/**",
+                                "/auth/api/auth/**" // Add this to handle cases where prefix isn't stripped
                         ).permitAll()
 
                         .anyRequest().authenticated()

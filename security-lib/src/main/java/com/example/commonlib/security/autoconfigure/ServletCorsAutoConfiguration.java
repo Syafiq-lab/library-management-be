@@ -25,6 +25,7 @@ public class ServletCorsAutoConfiguration {
         cfg.setAllowedOrigins(props.getAllowedOrigins());
         cfg.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         cfg.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Requested-With"));
+        cfg.setAllowedHeaders(List.of("*"));
         cfg.setExposedHeaders(List.of("Authorization"));
         cfg.setAllowCredentials(false);
 

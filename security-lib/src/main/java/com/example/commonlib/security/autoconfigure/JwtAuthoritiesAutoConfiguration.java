@@ -16,27 +16,30 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class JwtAuthoritiesAutoConfiguration {
 
-    @Bean
-    @ConditionalOnMissingBean(name = "jwtAuthConverterServlet")
-    public Converter<Jwt, AbstractAuthenticationToken> jwtAuthConverterServlet(SecuritySharedProperties props) {
+	@Bean
+	@ConditionalOnMissingBean(name = "jwtAuthConverterServlet")
+	public Converter<Jwt, AbstractAuthenticationToken> jwtAuthConverterServlet(SecuritySharedProperties props) {
 
-        JwtGrantedAuthoritiesConverter gac = new JwtGrantedAuthoritiesConverter();
-        gac.setAuthoritiesClaimName(props.getRolesClaim());
-        gac.setAuthorityPrefix(props.getRolePrefix());
+		log.debug("Configuring JwtAuthenticationConverter (rolesClaim='{}', rolePrefix='{}')", props.getRolesClaim(), props.getRolePrefix());
 
-        JwtAuthenticationConverter jac = new JwtAuthenticationConverter();
-        jac.setJwtGrantedAuthoritiesConverter(gac);
+		JwtGrantedAuthoritiesConverter gac = new JwtGrantedAuthoritiesConverter();
+		gac.setAuthoritiesClaimName(props.getRolesClaim());
+		gac.setAuthorityPrefix(props.getRolePrefix());
 
-        return jac; // JwtAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken>
-    }
+		JwtAuthenticationConverter jac = new JwtAuthenticationConverter();
+		jac.setJwtGrantedAuthoritiesConverter(gac);
 
-    @Bean
-    @ConditionalOnMissingBean(name = "jwtAuthConverterReactive")
-    public Converter<Jwt, Mono<AbstractAuthenticationToken>> jwtAuthConverterReactive(
-            Converter<Jwt, AbstractAuthenticationToken> jwtAuthConverterServlet
-    ) {
-        return new ReactiveJwtAuthenticationConverterAdapter(jwtAuthConverterServlet);
-    }
+		return jac; // JwtAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken>
+	}
+
+	@Bean
+	@ConditionalOnMissingBean(name = "jwtAuthConverterReactive")
+	public Converter<Jwt, Mono<AbstractAuthenticationToken>> jwtAuthConverterReactive(
+			Converter<Jwt, AbstractAuthenticationToken> jwtAuthConverterServlet
+	) {
+		log.debug("Creating ReactiveJwtAuthenticationConverterAdapter from servlet JwtAuthenticationConverter");
+		return new ReactiveJwtAuthenticationConverterAdapter(jwtAuthConverterServlet);
+	}
 
 
 }

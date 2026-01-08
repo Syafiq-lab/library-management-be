@@ -4,30 +4,38 @@ eureka:
   client:
     service-url:
       defaultZone: http://service-registry:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
 
 spring:
-  datasource:
-    url: jdbc:mysql://mysql:3306/userdb?useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: root
-
   kafka:
     bootstrap-servers: kafka:9092
-  security:
-    filter:
-      permitAll:
-        - /v3/api-docs/**
-        - /swagger-ui.html
-        - /swagger-ui/**
-        - /webjars/**
-        - /favicon.ico
-        - /actuator/health
 
-logging:
-  level:
-    com.example: DEBUG
-    org.springframework: INFO
-    reactor.netty: INFO
+  # ✅ IMPORTANT: keep DB defaults for docker, otherwise services may fall back to localhost
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST:mysql}:${DB_PORT:3306}/${DB_NAME:userdb}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: ${DB_USER:root}
+    password: ${DB_PASS:root}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+  # ✅ Only gateway will care; harmless elsewhere.
+  cloud:
+    gateway:
+      server:
+        webflux:
+          # Enables Forwarded/X-Forwarded header filters (dev: permissive; prod: lock down)
+          trusted-proxies: ".*"
+
+server:
+  # Makes Spring use Forwarded / X-Forwarded-* headers properly behind a proxy/gateway
+  forward-headers-strategy: framework
 
 security:
   shared:
@@ -39,7 +47,7 @@ security:
       - /webjars/**
       - /favicon.ico
 
-      # ✅ IMPORTANT: allow docs behind gateway prefixes
+      # docs behind gateway prefixes
       - /auth/v3/api-docs
       - /auth/v3/api-docs/**
       - /users/v3/api-docs
@@ -49,5 +57,20 @@ security:
       - /qr/v3/api-docs
       - /qr/v3/api-docs/**
 
-      # keep if you want login/register public
+      # public auth endpoints (if intended)
       - /api/auth/**
+      # ✅ public auth endpoints THROUGH gateway prefix
+      - /auth/api/auth/**
+    allowed-origins:
+      - "http://localhost:8080"
+      - "http://127.0.0.1:8080"
+
+logging:
+  level:
+    com.example: DEBUG
+    org.springframework: DEBUG
+    reactor.netty: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.server: DEBUG
+

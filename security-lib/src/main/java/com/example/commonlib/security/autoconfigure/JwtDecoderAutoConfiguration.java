@@ -18,23 +18,23 @@ import java.util.Base64;
 @Slf4j
 public class JwtDecoderAutoConfiguration {
 
-    @Bean
-    @ConditionalOnMissingBean(JwtDecoder.class)
-    public JwtDecoder jwtDecoder(@Value("${security.jwt.secret}") String jwtSecret) {
-        log.info("Auto-configuring JwtDecoder (HS256)");
+	@Bean
+	@ConditionalOnMissingBean(JwtDecoder.class)
+	public JwtDecoder jwtDecoder(@Value("${security.jwt.secret}") String jwtSecret) {
+		log.info("Auto-configuring JwtDecoder (HS256)");
 
-        byte[] keyBytes;
-        try {
-            keyBytes = Base64.getDecoder().decode(jwtSecret);
-            log.debug("JWT secret decoded as Base64 (len={})", keyBytes.length);
-        } catch (IllegalArgumentException ex) {
-            keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
-            log.debug("JWT secret treated as plain text (len={})", keyBytes.length);
-        }
+		byte[] keyBytes;
+		try {
+			keyBytes = Base64.getDecoder().decode(jwtSecret);
+			log.debug("JWT secret decoded as Base64 (len={})", keyBytes.length);
+		} catch (IllegalArgumentException ex) {
+			keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
+			log.debug("JWT secret treated as plain text (len={})", keyBytes.length);
+		}
 
-        SecretKey secretKey = new SecretKeySpec(keyBytes, "HmacSHA256");
-        return NimbusJwtDecoder.withSecretKey(secretKey)
-                .macAlgorithm(MacAlgorithm.HS256)
-                .build();
-    }
+		SecretKey secretKey = new SecretKeySpec(keyBytes, "HmacSHA256");
+		return NimbusJwtDecoder.withSecretKey(secretKey)
+				.macAlgorithm(MacAlgorithm.HS256)
+				.build();
+	}
 }
