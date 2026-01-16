@@ -42,6 +42,7 @@ public class SecurityConfig {
 
                         // ✅ public endpoints
                         .requestMatchers(
+                                "/error",
                                 "/actuator/**", // Allow all actuator endpoints
                                 "/v3/api-docs/**",
                                 "/swagger-ui.html",

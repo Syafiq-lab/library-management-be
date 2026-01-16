@@ -87,8 +87,7 @@ springdoc:
 security:
   jwt:
     # Use env var if present; fallback for local dev
-    secret: ${JWT_SECRET:local}
-
+    secret: ${JWT_SECRET:locallibrarymanagementlocallibrarymanagementlocallibrarymanagement}
   shared:
     # Health only in non-docker
     permit-all:

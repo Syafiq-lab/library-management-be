@@ -5,3 +5,8 @@ server:
 spring:
   application:
     name: user-service
+
+security:
+  shared:
+    permit-all:
+      - "/api/users" # Method: POST is implicitly allowed if we don't specify

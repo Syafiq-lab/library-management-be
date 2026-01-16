@@ -1,9 +1,9 @@
 package com.example.authservice.auth;
 
-import com.example.authservice.auth.dto.AuthRequest;
-import com.example.authservice.auth.dto.AuthResponse;
-import com.example.authservice.auth.dto.RefreshTokenRequest;
-import com.example.authservice.auth.dto.RegisterRequest;
+import com.example.authservice.dto.AuthRequest;
+import com.example.authservice.dto.AuthResponse;
+import com.example.authservice.dto.RefreshTokenRequest;
+import com.example.authservice.dto.RegisterRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

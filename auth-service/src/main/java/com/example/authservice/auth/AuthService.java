@@ -1,8 +1,9 @@
 package com.example.authservice.auth;
 
-import com.example.authservice.auth.dto.AuthRequest;
-import com.example.authservice.auth.dto.AuthResponse;
-import com.example.authservice.auth.dto.RegisterRequest;
+import com.example.authservice.client.UserClient;
+import com.example.authservice.dto.AuthRequest;
+import com.example.authservice.dto.AuthResponse;
+import com.example.authservice.dto.RegisterRequest;
 import com.example.authservice.security.jwt.JwtService;
 import com.example.authservice.token.RefreshToken;
 import com.example.authservice.token.RefreshTokenRepository;
@@ -35,30 +36,21 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final UserClient userClient;
 
     @Transactional
     public AuthResponse register(RegisterRequest request) {
-        String emailForLog = request.getEmail() == null ? null : request.getEmail().toLowerCase(Locale.ROOT);
-        log.debug("Register attempt email={}", emailForLog);
-        String email = request.getEmail().toLowerCase(Locale.ROOT);
-        if (userRepository.existsByEmail(email)) {
-            log.warn("Register rejected: email already in use email={}", email);
-            throw new IllegalArgumentException("Email already in use");
-        }
+        log.debug("Register attempt via user-service: email={}", request.getEmail());
+        
+        // 1. Delegate user creation to the owner of the data
+        userClient.createUser(request);
 
-        User user = User.builder()
-                .email(email)
-                .fullName(request.getFullName())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER)
-                .active(true)
-                .createdAt(Instant.now())
-                .updatedAt(Instant.now())
-                .build();
+        // 2. Fetch the newly created user to generate tokens
+        // (Alternatively, have UserClient return the user object)
+        User user = userRepository.findByEmail(request.getEmail().toLowerCase(Locale.ROOT))
+                .orElseThrow(() -> new RuntimeException("User creation failed or sync delay"));
 
-        userRepository.save(user);
-
-        log.info("User registered email={} id={} role={}", user.getEmail(), user.getId(), user.getRole());
+        log.info("User registered via delegation email={} id={}", user.getEmail(), user.getId());
 
         UserDetails userDetails = buildUserDetails(user);
         String accessToken = jwtService.generateAccessToken(userDetails);
@@ -66,8 +58,6 @@ public class AuthService {
 
         return new AuthResponse(accessToken, refreshToken);
     }
-
-    @Transactional
     public AuthResponse authenticate(AuthRequest request) {
         Authentication authentication;
 try {

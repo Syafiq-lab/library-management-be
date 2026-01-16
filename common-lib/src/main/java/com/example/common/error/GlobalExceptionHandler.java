@@ -4,6 +4,7 @@ import com.example.common.api.ApiResponse;
 import com.example.common.exception.BusinessException;
 import com.example.common.exception.NotFoundException;
 import com.example.common.exception.UserNotFoundException;
+import feign.FeignException;
 import jakarta.validation.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -96,6 +97,21 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         );
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(FeignException.Unauthorized.class)
+    public ResponseEntity<ApiResponse<Void>> handleFeign401(FeignException.Unauthorized ex, WebRequest request) {
+        log.warn("Feign 401 Unauthorized | {} | msg={}",
+                request.getDescription(false),
+                ex.getMessage());
+
+        ApiResponse<Void> body = ApiResponse.error(
+                HttpStatus.UNAUTHORIZED,
+                "Unauthorized",
+                List.of("USER_SERVICE_UNAUTHORIZED")
+        );
+        return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
+    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Void>> handleUnhandled(Exception ex, WebRequest request) {

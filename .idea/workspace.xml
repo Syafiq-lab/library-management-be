@@ -4,24 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a08b3a7a-feaa-49bf-84bd-38c879f4758f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/detekt.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a08b3a7a-feaa-49bf-84bd-38c879f4758f" name="Changes" comment="fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/example/gateway/config/GatewaySecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/AuthServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/AuthServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/dto/AuthRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/dto/AuthRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/dto/AuthResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/dto/AuthResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/dto/RefreshTokenRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/dto/RefreshTokenRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/dto/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/dto/RegisterRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/api-gateway-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/api-gateway-docker.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/application-docker.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/application-docker.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/JwtAuthoritiesAutoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/JwtAuthoritiesAutoConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/JwtDecoderAutoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/JwtDecoderAutoConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/MethodSecurityAutoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/MethodSecurityAutoConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/PropertiesAutoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/PropertiesAutoConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/ReactiveCorsAutoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/ReactiveCorsAutoConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/ReactiveJwtDecoderAutoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/ReactiveJwtDecoderAutoConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/ReactiveResourceServerAutoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/ReactiveResourceServerAutoConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/SecuritySharedProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/SecuritySharedProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/ServletCorsAutoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/ServletCorsAutoConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/ServletResourceServerAutoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/security-lib/src/main/java/com/example/commonlib/security/autoconfigure/ServletResourceServerAutoConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-lib/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-lib/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/example/common/error/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-lib/src/main/java/com/example/common/error/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/api-gateway-docker.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/user-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/user-service.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +27,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="157" />
+    <option name="cachedIndexableFilesCount" value="158" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -68,6 +66,9 @@
   &quot;associatedIndex&quot;: 2
 }</component>
   <component name="ProjectId" id="37ptq24x2ji38aZSbE0C7wnBR2R" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -170,8 +171,20 @@
       <option name="presentableId" value="Default" />
       <updated>1767612031397</updated>
       <workItem from="1767612033556" duration="5857000" />
-      <workItem from="1767734723246" duration="13412000" />
+      <workItem from="1767734723246" duration="13526000" />
+      <workItem from="1767962241373" duration="205000" />
+      <workItem from="1767962487412" duration="22608000" />
+      <workItem from="1768514181020" duration="5183000" />
     </task>
+    <task id="LOCAL-00001" summary="fix">
+      <option name="closed" value="true" />
+      <created>1767830746473</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1767830746473</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,5 +200,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
 </project>
