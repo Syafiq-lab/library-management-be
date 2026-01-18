@@ -8,7 +8,6 @@ x-spring-common-env: &spring-common-env
   SPRING_PROFILES_ACTIVE: docker
   CONFIG_SERVER_URL: http://config-server:8888
   EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
-  JWT_SECRET: ${JWT_SECRET:-local}
 
 services:
   # -------------------------

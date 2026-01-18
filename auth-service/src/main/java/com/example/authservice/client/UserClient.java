@@ -1,6 +1,6 @@
 package com.example.authservice.client;
 
-import com.example.authservice.dto.RegisterRequest;
+import com.example.authservice.dto.UserCreateRequest;
 import com.example.authservice.security.jwt.JwtService;
 import feign.RequestInterceptor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,11 +15,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(name = "user-service", path = "/api/users", configuration = UserClient.Configuration.class)
+@FeignClient(
+        name = "user-service",
+        path = "/api/users",
+        configuration = UserClient.Configuration.class
+)
 public interface UserClient {
 
     @PostMapping
-    void createUser(@RequestBody RegisterRequest request);
+    void createUser(@RequestBody UserCreateRequest request);
 
     @GetMapping("/{id}")
     Object getUserById(@PathVariable("id") Long id);
@@ -32,7 +36,7 @@ public interface UserClient {
             return requestTemplate -> {
                 log.debug("Generating internal system token for service-to-service call");
 
-                // Create a system user representation for the token
+                // This token must contain ROLE_INTERNAL if user-service requires it
                 User systemUser = new User(
                         "auth-service-internal",
                         "",

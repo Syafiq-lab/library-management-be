@@ -1,46 +1,670 @@
-2026-01-15T23:31:56.444555980Z 2026-01-15T23:31:56.444Z DEBUG 98 --- [auth-service] [nio-8090-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /actuator/health
-2026-01-15T23:31:56.445046221Z 2026-01-15T23:31:56.444Z DEBUG 98 --- [auth-service] [nio-8090-exec-9] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-01-15T23:31:56.445291212Z 2026-01-15T23:31:56.445Z DEBUG 98 --- [auth-service] [nio-8090-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /actuator/health
-2026-01-15T23:31:56.445464690Z 2026-01-15T23:31:56.445Z DEBUG 98 --- [auth-service] [nio-8090-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/actuator/health", parameters={}
-2026-01-15T23:31:56.445652117Z 2026-01-15T23:31:56.445Z DEBUG 98 --- [auth-service] [nio-8090-exec-9] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped to Actuator web endpoint 'health'
-2026-01-15T23:31:56.446152453Z 2026-01-15T23:31:56.445Z DEBUG 98 --- [auth-service] [nio-8090-exec-9] m.m.a.RequestResponseBodyMethodProcessor : Read "application/octet-stream" to []
-2026-01-15T23:31:56.447467164Z 2026-01-15T23:31:56.447Z DEBUG 98 --- [auth-service] [nio-8090-exec-9] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
-2026-01-15T23:31:56.448037383Z 2026-01-15T23:31:56.447Z DEBUG 98 --- [auth-service] [nio-8090-exec-9] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
-2026-01-15T23:31:56.449375909Z 2026-01-15T23:31:56.449Z DEBUG 98 --- [auth-service] [nio-8090-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-01-15T23:31:56.449470484Z 2026-01-15T23:31:56.449Z DEBUG 98 --- [auth-service] [nio-8090-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [org.springframework.boot.actuate.health.SystemHealth@8fef4a3]
-2026-01-15T23:31:56.450292352Z 2026-01-15T23:31:56.450Z DEBUG 98 --- [auth-service] [nio-8090-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2026-01-15T23:31:57.396561328Z 2026-01-15T23:31:57.396Z DEBUG 98 --- [auth-service] [nio-8090-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/register
-2026-01-15T23:31:57.397553068Z 2026-01-15T23:31:57.397Z DEBUG 98 --- [auth-service] [nio-8090-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-01-15T23:31:57.398681294Z 2026-01-15T23:31:57.398Z DEBUG 98 --- [auth-service] [nio-8090-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/register
-2026-01-15T23:31:57.399349648Z 2026-01-15T23:31:57.398Z DEBUG 98 --- [auth-service] [nio-8090-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/auth/api/auth/register", parameters={}
-2026-01-15T23:31:57.399794409Z 2026-01-15T23:31:57.399Z DEBUG 98 --- [auth-service] [nio-8090-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.authservice.auth.AuthController#register(RegisterRequest)
-2026-01-15T23:31:57.409720159Z 2026-01-15T23:31:57.409Z DEBUG 98 --- [auth-service] [nio-8090-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.example.authservice.dto.RegisterRequest@63ecd35f]
-2026-01-15T23:31:58.023114696Z 2026-01-15T23:31:58.022Z DEBUG 98 --- [auth-service] [nio-8090-exec-1] o.s.beans.CachedIntrospectionResults     : Not strongly caching class [com.example.authservice.dto.RegisterRequest] because it is not cache-safe
-2026-01-15T23:31:58.036796696Z 2026-01-15T23:31:58.036Z  WARN 98 --- [auth-service] [nio-8090-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity<com.example.authservice.dto.AuthResponse> com.example.authservice.auth.AuthController.register(com.example.authservice.dto.RegisterRequest): [Field error in object 'registerRequest' on field 'email': rejected value [string]; codes [Email.registerRequest.email,Email.email,Email.java.lang.String,Email]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [registerRequest.email,email]; arguments []; default message [email],[Ljakarta.validation.constraints.Pattern$Flag;@1928fb32,.*]; default message [must be a well-formed email address]] ]
-2026-01-15T23:31:58.037002795Z 2026-01-15T23:31:58.036Z DEBUG 98 --- [auth-service] [nio-8090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 400 BAD_REQUEST
-2026-01-15T23:31:58.068382334Z 2026-01-15T23:31:58.068Z DEBUG 98 --- [auth-service] [nio-8090-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /error
-2026-01-15T23:31:58.069051870Z 2026-01-15T23:31:58.068Z DEBUG 98 --- [auth-service] [nio-8090-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /error
-2026-01-15T23:31:58.069702316Z 2026-01-15T23:31:58.069Z DEBUG 98 --- [auth-service] [nio-8090-exec-1] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/auth/error", parameters={}
-2026-01-15T23:31:58.070178640Z 2026-01-15T23:31:58.069Z DEBUG 98 --- [auth-service] [nio-8090-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
-2026-01-15T23:31:58.096386902Z 2026-01-15T23:31:58.096Z DEBUG 98 --- [auth-service] [nio-8090-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/yaml]
-2026-01-15T23:31:58.097543246Z 2026-01-15T23:31:58.097Z DEBUG 98 --- [auth-service] [nio-8090-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Thu Jan 15 23:31:58 UTC 2026, status=400, error=Bad Request, trace=org.springframework.we (truncated)...]
-2026-01-15T23:31:58.146969459Z 2026-01-15T23:31:58.146Z DEBUG 98 --- [auth-service] [nio-8090-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 400
-2026-01-15T23:31:58.147049047Z 2026-01-15T23:31:58.146Z DEBUG 98 --- [auth-service] [nio-8090-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-01-15T23:32:01.506363604Z 2026-01-15T23:32:01.506Z DEBUG 98 --- [auth-service] [nio-8090-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /actuator/health
-2026-01-15T23:32:01.506886221Z 2026-01-15T23:32:01.506Z DEBUG 98 --- [auth-service] [nio-8090-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
-2026-01-15T23:32:01.507082508Z 2026-01-15T23:32:01.506Z DEBUG 98 --- [auth-service] [nio-8090-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /actuator/health
-2026-01-15T23:32:01.507201319Z 2026-01-15T23:32:01.507Z DEBUG 98 --- [auth-service] [nio-8090-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/actuator/health", parameters={}
-2026-01-15T23:32:01.507392112Z 2026-01-15T23:32:01.507Z DEBUG 98 --- [auth-service] [nio-8090-exec-3] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped to Actuator web endpoint 'health'
-2026-01-15T23:32:01.507769966Z 2026-01-15T23:32:01.507Z DEBUG 98 --- [auth-service] [nio-8090-exec-3] m.m.a.RequestResponseBodyMethodProcessor : Read "application/octet-stream" to []
-2026-01-15T23:32:01.509153947Z 2026-01-15T23:32:01.508Z DEBUG 98 --- [auth-service] [nio-8090-exec-3] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
-2026-01-15T23:32:01.509465194Z 2026-01-15T23:32:01.509Z DEBUG 98 --- [auth-service] [nio-8090-exec-3] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
-2026-01-15T23:32:01.510482562Z 2026-01-15T23:32:01.510Z DEBUG 98 --- [auth-service] [nio-8090-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
-2026-01-15T23:32:01.510575804Z 2026-01-15T23:32:01.510Z DEBUG 98 --- [auth-service] [nio-8090-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [org.springframework.boot.actuate.health.SystemHealth@27d7f36]
-2026-01-15T23:32:01.511377004Z 2026-01-15T23:32:01.511Z DEBUG 98 --- [auth-service] [nio-8090-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
-2026-01-15T23:32:04.970257838Z 2026-01-15T23:32:04.969Z DEBUG 98 --- [auth-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : HTTP PUT http://service-registry:8761/eureka/apps/AUTH-SERVICE/b4b37c77e54d:auth-service:8090?status=UP&lastDirtyTimestamp=1768519084873
-2026-01-15T23:32:04.970627106Z 2026-01-15T23:32:04.970Z DEBUG 98 --- [auth-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
-2026-01-15T23:32:04.971530792Z 2026-01-15T23:32:04.971Z DEBUG 98 --- [auth-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : HTTP GET http://service-registry:8761/eureka/apps/delta
-2026-01-15T23:32:04.971790109Z 2026-01-15T23:32:04.971Z DEBUG 98 --- [auth-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
-2026-01-15T23:32:04.974667611Z 2026-01-15T23:32:04.974Z DEBUG 98 --- [auth-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
-2026-01-15T23:32:04.974721899Z 2026-01-15T23:32:04.974Z DEBUG 98 --- [auth-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
-2026-01-15T23:32:04.974793021Z 2026-01-15T23:32:04.974Z DEBUG 98 --- [auth-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+-service-1       | 2026-01-18T23:10:13.510Z DEBUG 101 --- [auth-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
+auth-service-1       | 2026-01-18T23:10:13.512Z DEBUG 101 --- [auth-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : HTTP GET http://service-registry:8761/eureka/apps/delta
+auth-service-1       | 2026-01-18T23:10:13.512Z DEBUG 101 --- [auth-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
+auth-service-1       | 2026-01-18T23:10:13.515Z DEBUG 101 --- [auth-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
+auth-service-1       | 2026-01-18T23:10:13.518Z DEBUG 101 --- [auth-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
+auth-service-1       | 2026-01-18T23:10:13.518Z DEBUG 101 --- [auth-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+qr-service-1         | 2026-01-18T23:10:14.259Z DEBUG 87 --- [qr-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : HTTP PUT http://service-registry:8761/eureka/apps/QR-SERVICE/861710d425bf:qr-service:8093?status=UP&lastDirtyTimestamp=1768777634240
+qr-service-1         | 2026-01-18T23:10:14.259Z DEBUG 87 --- [qr-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
+qr-service-1         | 2026-01-18T23:10:14.261Z DEBUG 87 --- [qr-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : HTTP GET http://service-registry:8761/eureka/apps/delta
+qr-service-1         | 2026-01-18T23:10:14.261Z DEBUG 87 --- [qr-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
+qr-service-1         | 2026-01-18T23:10:14.264Z DEBUG 87 --- [qr-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
+qr-service-1         | 2026-01-18T23:10:14.265Z DEBUG 87 --- [qr-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
+qr-service-1         | 2026-01-18T23:10:14.265Z DEBUG 87 --- [qr-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+inventory-service-1  | 2026-01-18T23:10:15.845Z DEBUG 86 --- [inventory-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : HTTP PUT http://service-registry:8761/eureka/apps/INVENTORY-SERVICE/4bd91bad41da:inventory-service:8092?status=UP&lastDirtyTimestamp=1768777665857
+inventory-service-1  | 2026-01-18T23:10:15.845Z DEBUG 86 --- [inventory-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
+inventory-service-1  | 2026-01-18T23:10:15.846Z DEBUG 86 --- [inventory-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : HTTP GET http://service-registry:8761/eureka/apps/delta
+inventory-service-1  | 2026-01-18T23:10:15.847Z DEBUG 86 --- [inventory-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
+inventory-service-1  | 2026-01-18T23:10:15.851Z DEBUG 86 --- [inventory-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
+inventory-service-1  | 2026-01-18T23:10:15.851Z DEBUG 86 --- [inventory-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
+inventory-service-1  | 2026-01-18T23:10:15.851Z DEBUG 86 --- [inventory-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+auth-service-1       | 2026-01-18T23:10:16.910Z DEBUG 101 --- [auth-service] [nio-8090-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /actuator/health
+auth-service-1       | 2026-01-18T23:10:16.911Z DEBUG 101 --- [auth-service] [nio-8090-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+auth-service-1       | 2026-01-18T23:10:16.911Z DEBUG 101 --- [auth-service] [nio-8090-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /actuator/health
+auth-service-1       | 2026-01-18T23:10:16.911Z DEBUG 101 --- [auth-service] [nio-8090-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/actuator/health", parameters={}
+config-server-1      | 2026-01-18T23:10:16.931Z  INFO 90 --- [config-server] [nio-8888-exec-4] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'file [/config-repo/application.yml]' via location 'file:/config-repo/'
+auth-service-1       | 2026-01-18T23:10:16.912Z DEBUG 101 --- [auth-service] [nio-8090-exec-5] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped to Actuator web endpoint 'health'
+auth-service-1       | 2026-01-18T23:10:16.912Z DEBUG 101 --- [auth-service] [nio-8090-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Read "application/octet-stream" to []
+auth-service-1       | 2026-01-18T23:10:16.913Z DEBUG 101 --- [auth-service] [nio-8090-exec-5] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+auth-service-1       | 2026-01-18T23:10:16.914Z DEBUG 101 --- [auth-service] [nio-8090-exec-5] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+auth-service-1       | 2026-01-18T23:10:16.915Z DEBUG 101 --- [auth-service] [nio-8090-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+auth-service-1       | 2026-01-18T23:10:16.916Z DEBUG 101 --- [auth-service] [nio-8090-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [org.springframework.boot.actuate.health.SystemHealth@1e0b7a81]
+auth-service-1       | 2026-01-18T23:10:16.917Z DEBUG 101 --- [auth-service] [nio-8090-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+user-service-1       | 2026-01-18T23:10:18.213Z DEBUG 84 --- [user-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : HTTP PUT http://service-registry:8761/eureka/apps/USER-SERVICE/6e3a03016c1a:user-service:8091?status=UP&lastDirtyTimestamp=1768777638205
+user-service-1       | 2026-01-18T23:10:18.213Z DEBUG 84 --- [user-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
+user-service-1       | 2026-01-18T23:10:18.214Z DEBUG 84 --- [user-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : HTTP GET http://service-registry:8761/eureka/apps/delta
+user-service-1       | 2026-01-18T23:10:18.215Z DEBUG 84 --- [user-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
+user-service-1       | 2026-01-18T23:10:18.219Z DEBUG 84 --- [user-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
+user-service-1       | 2026-01-18T23:10:18.219Z DEBUG 84 --- [user-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
+user-service-1       | 2026-01-18T23:10:18.219Z DEBUG 84 --- [user-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+auth-service-1       | 2026-01-18T23:10:21.967Z DEBUG 101 --- [auth-service] [nio-8090-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /actuator/health
+auth-service-1       | 2026-01-18T23:10:21.967Z DEBUG 101 --- [auth-service] [nio-8090-exec-7] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+auth-service-1       | 2026-01-18T23:10:21.968Z DEBUG 101 --- [auth-service] [nio-8090-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /actuator/health
+auth-service-1       | 2026-01-18T23:10:21.968Z DEBUG 101 --- [auth-service] [nio-8090-exec-7] o.s.web.servlet.DispatcherServlet        : GET "/actuator/health", parameters={}
+auth-service-1       | 2026-01-18T23:10:21.968Z DEBUG 101 --- [auth-service] [nio-8090-exec-7] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped to Actuator web endpoint 'health'
+auth-service-1       | 2026-01-18T23:10:21.969Z DEBUG 101 --- [auth-service] [nio-8090-exec-7] m.m.a.RequestResponseBodyMethodProcessor : Read "application/octet-stream" to []
+auth-service-1       | 2026-01-18T23:10:21.970Z DEBUG 101 --- [auth-service] [nio-8090-exec-7] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+auth-service-1       | 2026-01-18T23:10:21.970Z DEBUG 101 --- [auth-service] [nio-8090-exec-7] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+auth-service-1       | 2026-01-18T23:10:21.972Z DEBUG 101 --- [auth-service] [nio-8090-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+config-server-1      | 2026-01-18T23:10:22.005Z  INFO 90 --- [config-server] [nio-8888-exec-6] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'file [/config-repo/application.yml]' via location 'file:/config-repo/'
+auth-service-1       | 2026-01-18T23:10:21.972Z DEBUG 101 --- [auth-service] [nio-8090-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [org.springframework.boot.actuate.health.SystemHealth@7e43d076]
+auth-service-1       | 2026-01-18T23:10:21.973Z DEBUG 101 --- [auth-service] [nio-8090-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+auth-service-1       | 2026-01-18T23:10:27.030Z DEBUG 101 --- [auth-service] [nio-8090-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /actuator/health
+auth-service-1       | 2026-01-18T23:10:27.031Z DEBUG 101 --- [auth-service] [nio-8090-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+auth-service-1       | 2026-01-18T23:10:27.031Z DEBUG 101 --- [auth-service] [nio-8090-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /actuator/health
+auth-service-1       | 2026-01-18T23:10:27.032Z DEBUG 101 --- [auth-service] [nio-8090-exec-8] o.s.web.servlet.DispatcherServlet        : GET "/actuator/health", parameters={}
+auth-service-1       | 2026-01-18T23:10:27.032Z DEBUG 101 --- [auth-service] [nio-8090-exec-8] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped to Actuator web endpoint 'health'
+auth-service-1       | 2026-01-18T23:10:27.032Z DEBUG 101 --- [auth-service] [nio-8090-exec-8] m.m.a.RequestResponseBodyMethodProcessor : Read "application/octet-stream" to []
+auth-service-1       | 2026-01-18T23:10:27.034Z DEBUG 101 --- [auth-service] [nio-8090-exec-8] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+auth-service-1       | 2026-01-18T23:10:27.034Z DEBUG 101 --- [auth-service] [nio-8090-exec-8] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+auth-service-1       | 2026-01-18T23:10:27.037Z DEBUG 101 --- [auth-service] [nio-8090-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+auth-service-1       | 2026-01-18T23:10:27.038Z DEBUG 101 --- [auth-service] [nio-8090-exec-8] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [org.springframework.boot.actuate.health.SystemHealth@dcfe1cd]
+auth-service-1       | 2026-01-18T23:10:27.038Z DEBUG 101 --- [auth-service] [nio-8090-exec-8] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+config-server-1      | 2026-01-18T23:10:27.096Z  INFO 90 --- [config-server] [nio-8888-exec-7] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'file [/config-repo/application.yml]' via location 'file:/config-repo/'
+api-gateway-1        | 2026-01-18T23:10:28.994Z DEBUG 86 --- [api-gateway] [beatExecutor-%d] o.s.web.client.RestTemplate              : HTTP PUT http://service-registry:8761/eureka/apps/API-GATEWAY/a307ff774590:api-gateway:8080?status=UP&lastDirtyTimestamp=1768777618893
+api-gateway-1        | 2026-01-18T23:10:28.994Z DEBUG 86 --- [api-gateway] [beatExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
+api-gateway-1        | 2026-01-18T23:10:29.000Z DEBUG 86 --- [api-gateway] [beatExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
+api-gateway-1        | 2026-01-18T23:10:29.122Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.web.client.RestTemplate              : HTTP GET http://service-registry:8761/eureka/apps/delta
+api-gateway-1        | 2026-01-18T23:10:29.122Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
+api-gateway-1        | 2026-01-18T23:10:29.126Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
+api-gateway-1        | 2026-01-18T23:10:29.127Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.web.client.RestTemplate              : Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+api-gateway-1        | 2026-01-18T23:10:29.129Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition user-service-api applying {_genkey_0=/api/users/**} to Path
+api-gateway-1        | 2026-01-18T23:10:29.130Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition user-service-api applying filter {_genkey_0=2} to StripPrefix
+api-gateway-1        | 2026-01-18T23:10:29.131Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition matched: user-service-api
+api-gateway-1        | 2026-01-18T23:10:29.131Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition user-service applying {_genkey_0=/users/**} to Path
+api-gateway-1        | 2026-01-18T23:10:29.133Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition user-service applying filter {_genkey_0=1} to StripPrefix
+api-gateway-1        | 2026-01-18T23:10:29.134Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition matched: user-service
+api-gateway-1        | 2026-01-18T23:10:29.134Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition inventory-service-api applying {_genkey_0=/api/inventory/**} to Path
+api-gateway-1        | 2026-01-18T23:10:29.135Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition inventory-service-api applying filter {_genkey_0=2} to StripPrefix
+api-gateway-1        | 2026-01-18T23:10:29.135Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition matched: inventory-service-api
+api-gateway-1        | 2026-01-18T23:10:29.135Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition inventory-service applying {_genkey_0=/inventory/**} to Path
+api-gateway-1        | 2026-01-18T23:10:29.136Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition inventory-service applying filter {_genkey_0=1} to StripPrefix
+api-gateway-1        | 2026-01-18T23:10:29.137Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition matched: inventory-service
+api-gateway-1        | 2026-01-18T23:10:29.137Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition qr-service-api applying {_genkey_0=/api/qr/**} to Path
+api-gateway-1        | 2026-01-18T23:10:29.138Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition qr-service-api applying filter {_genkey_0=2} to StripPrefix
+api-gateway-1        | 2026-01-18T23:10:29.139Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition matched: qr-service-api
+api-gateway-1        | 2026-01-18T23:10:29.139Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition qr-service applying {_genkey_0=/qr/**} to Path
+api-gateway-1        | 2026-01-18T23:10:29.140Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition qr-service applying filter {_genkey_0=1} to StripPrefix
+api-gateway-1        | 2026-01-18T23:10:29.141Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition matched: qr-service
+api-gateway-1        | 2026-01-18T23:10:29.141Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition auth-service applying {_genkey_0=/auth/**} to Path
+api-gateway-1        | 2026-01-18T23:10:29.142Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition auth-service applying filter {_genkey_0=1} to StripPrefix
+api-gateway-1        | 2026-01-18T23:10:29.142Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.r.RouteDefinitionRouteLocator    : RouteDefinition matched: auth-service
+api-gateway-1        | 2026-01-18T23:10:29.143Z DEBUG 86 --- [api-gateway] [reshExecutor-%d] o.s.c.g.filter.GatewayMetricsFilter      : New routes count: 7
+auth-service-1       | 2026-01-18T23:10:32.325Z DEBUG 101 --- [auth-service] [nio-8090-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /actuator/health
+auth-service-1       | 2026-01-18T23:10:32.326Z DEBUG 101 --- [auth-service] [nio-8090-exec-9] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+
+config-server-1      | 2026-01-18T23:10:32.526Z  INFO 90 --- [config-server] [nio-8888-exec-8] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'file [/config-repo/application.yml]' via location 'file:/config-repo/'
+
+
+auth-service-1       | 2026-01-18T23:10:32.326Z DEBUG 101 --- [auth-service] [nio-8090-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /actuator/health
+auth-service-1       | 2026-01-18T23:10:32.327Z DEBUG 101 --- [auth-service] [nio-8090-exec-9] o.s.web.servlet.DispatcherServlet        : GET "/actuator/health", parameters={}
+auth-service-1       | 2026-01-18T23:10:32.327Z DEBUG 101 --- [auth-service] [nio-8090-exec-9] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped to Actuator web endpoint 'health'
+auth-service-1       | 2026-01-18T23:10:32.327Z DEBUG 101 --- [auth-service] [nio-8090-exec-9] m.m.a.RequestResponseBodyMethodProcessor : Read "application/octet-stream" to []
+auth-service-1       | 2026-01-18T23:10:32.331Z DEBUG 101 --- [auth-service] [nio-8090-exec-9] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+auth-service-1       | 2026-01-18T23:10:32.332Z DEBUG 101 --- [auth-service] [nio-8090-exec-9] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+auth-service-1       | 2026-01-18T23:10:32.333Z DEBUG 101 --- [auth-service] [nio-8090-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+auth-service-1       | 2026-01-18T23:10:32.333Z DEBUG 101 --- [auth-service] [nio-8090-exec-9] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [org.springframework.boot.actuate.health.SystemHealth@6ffc2c46]
+auth-service-1       | 2026-01-18T23:10:32.334Z DEBUG 101 --- [auth-service] [nio-8090-exec-9] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+api-gateway-1        | 2026-01-18T23:10:36.869Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] r.n.http.server.HttpServerOperations     : [30f89dd1, L:/172.18.0.11:8080 - R:/172.18.0.1:57786] New http connection, requesting read
+auth-service-1       | 2026-01-18T23:10:36.974Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/register
+api-gateway-1        | 2026-01-18T23:10:36.869Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] r.netty.transport.TransportConfig        : [30f89dd1, L:/172.18.0.11:8080 - R:/172.18.0.1:57786] Initialized pipeline DefaultChannelPipeline{(reactor.left.httpCodec = io.netty.handler.codec.http.HttpServerCodec), (reactor.left.httpTrafficHandler = reactor.netty.http.server.HttpTrafficHandler), (reactor.right.reactiveBridge = reactor.netty.channel.ChannelOperationsHandler)}
+
+
+auth-service-1       | 2026-01-18T23:10:36.975Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+
+auth-service-1       | 2026-01-18T23:10:36.977Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.security.web.FilterChainProxy        : Secured POST /api/auth/registerR:/172.18.0.1:57786] Increasing pending responses count: 1
+
+
+api-gateway-1        | 2026-01-18T23:10:36.884Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] reactor.netty.http.server.HttpServer     : [30f89dd1-1, L:/172.18.0.11:8080 - R:/172.18.0.1:57786] Handler is being applied: org.springframework.http.server.reactive.ReactorHttpHandlerAdapter@3e8e0434
+auth-service-1       | 2026-01-18T23:10:36.977Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.web.servlet.DispatcherServlet        : POST "/auth/api/auth/register", parameters={}
+auth-service-1       | 2026-01-18T23:10:36.977Z DEBUG 101 --- [auth-service] [io-8090-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.authservice.auth.AuthController#register(RegisterRequest)
+
+
+api-gateway-1        | 2026-01-18T23:10:36.924Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.w.s.s.DefaultWebSessionManager       : Created new WebSession.
+auth-service-1       | 2026-01-18T23:10:36.986Z DEBUG 101 --- [auth-service] [io-8090-exec-10] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.example.authservice.dto.RegisterRequest@158d489a]
+
+
+
+
+api-gateway-1        | 2026-01-18T23:10:36.925Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/logout', method=POST}
+api-gateway-1        | 2026-01-18T23:10:36.925Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Request 'POST /auth/api/auth/register' doesn't match 'POST /logout'
+api-gateway-1        | 2026-01-18T23:10:36.925Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : No matches found
+api-gateway-1        | 2026-01-18T23:10:36.925Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/**', method=OPTIONS}
+api-gateway-1        | 2026-01-18T23:10:36.925Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Request 'POST /auth/api/auth/register' doesn't match 'OPTIONS /**'
+api-gateway-1        | 2026-01-18T23:10:36.926Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : No matches found
+api-gateway-1        | 2026-01-18T23:10:36.926Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/actuator/**', method=null}
+api-gateway-1        | 2026-01-18T23:10:36.926Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Request 'POST /auth/api/auth/register' doesn't match 'null /actuator/**'
+api-gateway-1        | 2026-01-18T23:10:36.926Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : No matches found
+api-gateway-1        | 2026-01-18T23:10:36.926Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/v3/api-docs/**', method=null}
+api-gateway-1        | 2026-01-18T23:10:36.926Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Request 'POST /auth/api/auth/register' doesn't match 'null /v3/api-docs/**'
+api-gateway-1        | 2026-01-18T23:10:36.926Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : No matches found
+api-gateway-1        | 2026-01-18T23:10:36.926Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/swagger-ui.html', method=null}
+api-gateway-1        | 2026-01-18T23:10:36.926Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Request 'POST /auth/api/auth/register' doesn't match 'null /swagger-ui.html'
+api-gateway-1        | 2026-01-18T23:10:36.926Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : No matches found
+api-gateway-1        | 2026-01-18T23:10:36.926Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/swagger-ui/**', method=null}
+api-gateway-1        | 2026-01-18T23:10:36.926Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Request 'POST /auth/api/auth/register' doesn't match 'null /swagger-ui/**'
+api-gateway-1        | 2026-01-18T23:10:36.926Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : No matches found
+api-gateway-1        | 2026-01-18T23:10:36.926Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/webjars/**', method=null}
+api-gateway-1        | 2026-01-18T23:10:36.926Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Request 'POST /auth/api/auth/register' doesn't match 'null /webjars/**'
+api-gateway-1        | 2026-01-18T23:10:36.926Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : No matches found
+api-gateway-1        | 2026-01-18T23:10:36.926Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/favicon.ico', method=null}
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Request 'POST /auth/api/auth/register' doesn't match 'null /favicon.ico'
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : No matches found
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/auth/v3/api-docs', method=null}
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Request 'POST /auth/api/auth/register' doesn't match 'null /auth/v3/api-docs'
+
+
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : No matches found
+auth-service-1       | 2026-01-18T23:10:37.307Z DEBUG 101 --- [auth-service] [io-8090-exec-10] c.e.authservice.auth.AuthController      : POST /api/auth/register email=string@asf.c
+
+
+
+
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/auth/v3/api-docs/**', method=null}
+auth-service-1       | 2026-01-18T23:10:37.318Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [com.example.authservice.auth.AuthService.register]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+
+
+
+auth-service-1       | 2026-01-18T23:10:37.320Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1807668189<open>)] for JPA transaction
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Request 'POST /auth/api/auth/register' doesn't match 'null /auth/v3/api-docs/**'
+
+
+
+
+auth-service-1       | 2026-01-18T23:10:37.354Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@4fe33975]
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : No matches found
+
+
+
+
+auth-service-1       | 2026-01-18T23:10:37.360Z DEBUG 101 --- [auth-service] [io-8090-exec-10] c.example.authservice.auth.AuthService   : Register attempt: email=string@asf.c username=string
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/users/v3/api-docs', method=null}
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Request 'POST /auth/api/auth/register' doesn't match 'null /users/v3/api-docs'
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : No matches found
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/users/v3/api-docs/**', method=null}
+auth-service-1       | 2026-01-18T23:10:37.437Z DEBUG 101 --- [auth-service] [nio-8090-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /actuator/health
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Request 'POST /auth/api/auth/register' doesn't match 'null /users/v3/api-docs/**'
+auth-service-1       | 2026-01-18T23:10:37.439Z DEBUG 101 --- [auth-service] [nio-8090-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+
+
+
+
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : No matches found
+auth-service-1       | 2026-01-18T23:10:37.439Z DEBUG 101 --- [auth-service] [nio-8090-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /actuator/health
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/inventory/v3/api-docs', method=null}
+auth-service-1       | 2026-01-18T23:10:37.440Z DEBUG 101 --- [auth-service] [nio-8090-exec-4] o.s.web.servlet.DispatcherServlet        : GET "/actuator/health", parameters={}
+auth-service-1       | 2026-01-18T23:10:37.440Z DEBUG 101 --- [auth-service] [nio-8090-exec-4] s.b.a.e.w.s.WebMvcEndpointHandlerMapping : Mapped to Actuator web endpoint 'health'
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Request 'POST /auth/api/auth/register' doesn't match 'null /inventory/v3/api-docs'
+
+
+auth-service-1       | 2026-01-18T23:10:37.441Z DEBUG 101 --- [auth-service] [nio-8090-exec-4] m.m.a.RequestResponseBodyMethodProcessor : Read "application/octet-stream" to []
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : No matches found
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/inventory/v3/api-docs/**', method=null}
+auth-service-1       | 2026-01-18T23:10:37.443Z DEBUG 101 --- [auth-service] [nio-8090-exec-4] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+
+
+auth-service-1       | 2026-01-18T23:10:37.444Z DEBUG 101 --- [auth-service] [nio-8090-exec-4] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Request 'POST /auth/api/auth/register' doesn't match 'null /inventory/v3/api-docs/**'
+auth-service-1       | 2026-01-18T23:10:37.445Z DEBUG 101 --- [auth-service] [nio-8090-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/vnd.spring-boot.actuator.v3+json', given [*/*] and supported [application/vnd.spring-boot.actuator.v3+json, application/vnd.spring-boot.actuator.v2+json, application/json]
+
+
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : No matches found
+auth-service-1       | 2026-01-18T23:10:37.446Z DEBUG 101 --- [auth-service] [nio-8090-exec-4] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [org.springframework.boot.actuate.health.SystemHealth@596f1713]
+
+
+auth-service-1       | 2026-01-18T23:10:37.447Z DEBUG 101 --- [auth-service] [nio-8090-exec-4] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/qr/v3/api-docs', method=null}
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Request 'POST /auth/api/auth/register' doesn't match 'null /qr/v3/api-docs'
+api-gateway-1        | 2026-01-18T23:10:36.927Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : No matches found
+
+
+config-server-1      | 2026-01-18T23:10:37.657Z  INFO 90 --- [config-server] [nio-8888-exec-9] o.s.c.c.s.e.NativeEnvironmentRepository  : Adding property source: Config resource 'file [/config-repo/application.yml]' via location 'file:/config-repo/'
+api-gateway-1        | 2026-01-18T23:10:36.928Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/qr/v3/api-docs/**', method=null}
+api-gateway-1        | 2026-01-18T23:10:36.928Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Request 'POST /auth/api/auth/register' doesn't match 'null /qr/v3/api-docs/**'
+api-gateway-1        | 2026-01-18T23:10:36.928Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : No matches found
+api-gateway-1        | 2026-01-18T23:10:36.928Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/api/auth/**', method=null}
+api-gateway-1        | 2026-01-18T23:10:36.928Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Request 'POST /auth/api/auth/register' doesn't match 'null /api/auth/**'
+api-gateway-1        | 2026-01-18T23:10:36.928Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : No matches found
+api-gateway-1        | 2026-01-18T23:10:36.928Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : Trying to match using PathMatcherServerWebExchangeMatcher{pattern='/auth/api/auth/**', method=null}
+api-gateway-1        | 2026-01-18T23:10:36.928Z DEBUG 86 --- [api-gateway] [    parallel-11] athPatternParserServerWebExchangeMatcher : Checking match of request : '/auth/api/auth/register'; against '/auth/api/auth/**'
+api-gateway-1        | 2026-01-18T23:10:36.928Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.u.m.OrServerWebExchangeMatcher : matched
+api-gateway-1        | 2026-01-18T23:10:36.928Z DEBUG 86 --- [api-gateway] [    parallel-11] a.DelegatingReactiveAuthorizationManager : Checking authorization on '/auth/api/auth/register' using org.springframework.security.config.web.server.ServerHttpSecurity$AuthorizeExchangeSpec$Access$$Lambda/0x00007f5630776f00@5258862c
+api-gateway-1        | 2026-01-18T23:10:36.928Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.s.w.s.a.AuthorizationWebFilter       : Authorization successful
+api-gateway-1        | 2026-01-18T23:10:36.929Z DEBUG 86 --- [api-gateway] [    parallel-11] c.example.gateway.config.GatewayConfig   : No X-Trace-Id header present on request POST http://localhost:8080/auth/api/auth/register
+api-gateway-1        | 2026-01-18T23:10:36.931Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.c.g.h.RoutePredicateHandlerMapping   : Route matched: auth-service
+api-gateway-1        | 2026-01-18T23:10:36.931Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.c.g.h.RoutePredicateHandlerMapping   : Mapping [Exchange: POST http://localhost:8080/auth/api/auth/register] to Route{id='auth-service', uri=lb://auth-service, order=0, predicate=(RouteDefinitionRouteLocator$$Lambda/0x00007f5630911e70 && Paths: [/auth/**], match trailing slash: true), gatewayFilters=[[[StripPrefix parts = 1], order = 1]], metadata={}}
+api-gateway-1        | 2026-01-18T23:10:36.931Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.c.g.h.RoutePredicateHandlerMapping   : [30f89dd1-10] Mapped to org.springframework.cloud.gateway.handler.FilteringWebHandler@35b164a8
+api-gateway-1        | 2026-01-18T23:10:36.931Z DEBUG 86 --- [api-gateway] [    parallel-11] o.s.c.g.handler.FilteringWebHandler      : Sorted gatewayFilterFactories: [[GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter@19ed482c}, order = -2147483648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.AdaptCachedBodyGlobalFilter@242815db}, order = -2147482648], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyWriteResponseFilter@35e748fa}, order = -1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardPathFilter@4541f989}, order = 0], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.GatewayMetricsFilter@60f25657}, order = 0], [[StripPrefix parts = 1], order = 1], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.RouteToRequestUrlFilter@4dc36f3e}, order = 10000], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.FunctionRoutingFilter@17c2b4f}, order = 10010], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.StreamRoutingFilter@3e4d56f1}, order = 10010], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ReactiveLoadBalancerClientFilter@4fc4987f}, order = 10150], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.LoadBalancerServiceInstanceCookieFilter@fa4704a}, order = 10151], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.WebsocketRoutingFilter@369e7525}, order = 2147483646], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.NettyRoutingFilter@5e0b3424}, order = 2147483647], [GatewayFilterAdapter{delegate=org.springframework.cloud.gateway.filter.ForwardRoutingFilter@4aeec8b6}, order = 2147483647]]
+api-gateway-1        | 2026-01-18T23:10:36.944Z DEBUG 86 --- [api-gateway] [    parallel-11] g.f.h.o.ObservedRequestHttpHeadersFilter : Will instrument the HTTP request headers [Host:"localhost:8080", Content-Length:"111", sec-ch-ua-platform:""Windows"", User-Agent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 OPR/125.0.0.0", accept:"*/*", sec-ch-ua:""Opera";v="125", "Not?A_Brand";v="8", "Chromium";v="141"", Content-Type:"application/json", sec-ch-ua-mobile:"?0", Origin:"http://localhost:8080", Sec-Fetch-Site:"same-origin", Sec-Fetch-Mode:"cors", Sec-Fetch-Dest:"empty", Accept-Encoding:"gzip, deflate, br, zstd", Accept-Language:"en-US,en;q=0.9,ar;q=0.8,id;q=0.7,ms;q=0.6", Cookie:"authjs.callback-url=http%3A%2F%2Flocalhost%3A3000%2F; authjs.csrf-token=17058d4621965f64dcc1b4021758e7df7540639c224b39d3e16e8db3fe50323e%7Cf1081212f3b456649a6adc1ba09dd82ce90385419821c0a06a145af7fa533a5e; __next_hmr_refresh_hash__=3d1172cc5a83df764197cab3b5f1eb7d944decca6d8ada10", X-Trace-Id:"8b8293cb-d7b9-4473-bbfa-cc180e486a32", Forwarded:"proto=http;host="localhost:8080";for="172.18.0.1:57786"", X-Forwarded-For:"172.18.0.1", X-Forwarded-Proto:"http", X-Forwarded-Prefix:"/auth", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+api-gateway-1        | 2026-01-18T23:10:36.945Z DEBUG 86 --- [api-gateway] [    parallel-11] g.f.h.o.ObservedRequestHttpHeadersFilter : Client observation  {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='auth-service', spring.cloud.gateway.route.uri='lb://auth-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/auth/register'], map=[class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@78fb51d6', class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=9.0155E-5, duration(nanos)=90155.0, startTimeNanos=106437788626826}'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@7cc4ca11} created for the request. New headers are [Host:"localhost:8080", Content-Length:"111", sec-ch-ua-platform:""Windows"", User-Agent:"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36 OPR/125.0.0.0", accept:"*/*", sec-ch-ua:""Opera";v="125", "Not?A_Brand";v="8", "Chromium";v="141"", Content-Type:"application/json", sec-ch-ua-mobile:"?0", Origin:"http://localhost:8080", Sec-Fetch-Site:"same-origin", Sec-Fetch-Mode:"cors", Sec-Fetch-Dest:"empty", Accept-Encoding:"gzip, deflate, br, zstd", Accept-Language:"en-US,en;q=0.9,ar;q=0.8,id;q=0.7,ms;q=0.6", Cookie:"authjs.callback-url=http%3A%2F%2Flocalhost%3A3000%2F; authjs.csrf-token=17058d4621965f64dcc1b4021758e7df7540639c224b39d3e16e8db3fe50323e%7Cf1081212f3b456649a6adc1ba09dd82ce90385419821c0a06a145af7fa533a5e; __next_hmr_refresh_hash__=3d1172cc5a83df764197cab3b5f1eb7d944decca6d8ada10", X-Trace-Id:"8b8293cb-d7b9-4473-bbfa-cc180e486a32", Forwarded:"proto=http;host="localhost:8080";for="172.18.0.1:57786"", X-Forwarded-For:"172.18.0.1", X-Forwarded-Proto:"http", X-Forwarded-Prefix:"/auth", X-Forwarded-Port:"8080", X-Forwarded-Host:"localhost:8080"]
+api-gateway-1        | 2026-01-18T23:10:36.959Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] r.n.resources.PooledConnectionProvider   : [e87f9c89] Created a new pooled channel, now: 0 active connections, 0 inactive connections 0 pending acquire requests.
+api-gateway-1        | 2026-01-18T23:10:36.960Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] r.netty.transport.TransportConfig        : [e87f9c89] Initialized pipeline DefaultChannelPipeline{(reactor.left.httpCodec = io.netty.handler.codec.http.HttpClientCodec), (reactor.right.reactiveBridge = reactor.netty.channel.ChannelOperationsHandler)}
+api-gateway-1        | 2026-01-18T23:10:36.961Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] r.netty.transport.TransportConnector     : [e87f9c89] Connecting to [/172.18.0.12:8090].
+api-gateway-1        | 2026-01-18T23:10:36.962Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] r.n.r.DefaultPooledConnectionProvider    : [e87f9c89, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090] Registering pool release on close event for channel
+api-gateway-1        | 2026-01-18T23:10:36.962Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] r.n.resources.PooledConnectionProvider   : [e87f9c89, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090] Channel connected, now: 1 active connections, 0 inactive connections 0 pending acquire requests.
+api-gateway-1        | 2026-01-18T23:10:36.962Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] r.n.r.DefaultPooledConnectionProvider    : [e87f9c89, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090] onStateChange(PooledConnection{channel=[id: 0xe87f9c89, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090]}, [connected])
+api-gateway-1        | 2026-01-18T23:10:36.963Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] r.n.r.DefaultPooledConnectionProvider    : [e87f9c89-1, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090] onStateChange(GET{uri=/, connection=PooledConnection{channel=[id: 0xe87f9c89, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090]}}, [configured])
+api-gateway-1        | 2026-01-18T23:10:36.963Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] r.netty.http.client.HttpClientConnect    : [e87f9c89-1, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090] Handler is being applied: {uri=http://172.18.0.12:8090/api/auth/register, method=POST}
+api-gateway-1        | 2026-01-18T23:10:36.965Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] r.n.r.DefaultPooledConnectionProvider    : [e87f9c89-1, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090] onStateChange(POST{uri=/api/auth/register, connection=PooledConnection{channel=[id: 0xe87f9c89, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090]}}, [request_prepared])
+api-gateway-1        | 2026-01-18T23:10:36.971Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] reactor.netty.channel.FluxReceive        : [30f89dd1-1, L:/172.18.0.11:8080 - R:/172.18.0.1:57786] [terminated=true, cancelled=false, pending=1, error=null]: subscribing inbound receiver
+api-gateway-1        | 2026-01-18T23:10:36.975Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] r.n.r.DefaultPooledConnectionProvider    : [e87f9c89-1, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090] onStateChange(POST{uri=/api/auth/register, connection=PooledConnection{channel=[id: 0xe87f9c89, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090]}}, [request_sent])
+auth-service-1       | 2026-01-18T23:10:38.323Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.orm.jpa.JpaTransactionManager        : Found thread-bound EntityManager [SessionImpl(1807668189<open>)] for JPA transaction
+auth-service-1       | 2026-01-18T23:10:38.323Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.orm.jpa.JpaTransactionManager        : Participating in existing transaction
+auth-service-1       | 2026-01-18T23:10:38.508Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.c.openfeign.support.SpringEncoder    : Writing [UserCreateRequest(username=string, email=string@asf.c, fullName=string)] using [org.springframework.http.converter.json.MappingJackson2HttpMessageConverter@7e1570f3]
+auth-service-1       | 2026-01-18T23:10:38.530Z DEBUG 101 --- [auth-service] [io-8090-exec-10] c.e.a.client.UserClient$Configuration    : Generating internal system token for service-to-service call
+auth-service-1       | 2026-01-18T23:10:38.535Z DEBUG 101 --- [auth-service] [io-8090-exec-10] c.e.authservice.security.jwt.JwtService  : Generating access token for user=auth-service-internal
+auth-service-1       | 2026-01-18T23:10:38.568Z DEBUG 101 --- [auth-service] [io-8090-exec-10] c.e.authservice.security.jwt.JwtService  : JWT secret interpreted as base64
+auth-service-1       | 2026-01-18T23:10:38.638Z DEBUG 101 --- [auth-service] [io-8090-exec-10] s.c.a.AnnotationConfigApplicationContext : Refreshing LoadBalancerClientFactory-user-service
+auth-service-1       | 2026-01-18T23:10:38.639Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
+auth-service-1       | 2026-01-18T23:10:38.709Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.c.e.PropertySourcesPropertyResolver  : Found key 'loadbalancer.client.name' in PropertySource 'loadbalancer' with value of type String
+auth-service-1       | 2026-01-18T23:10:38.716Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.c.e.PropertySourcesPropertyResolver  : Found key 'loadbalancer.client.name' in PropertySource 'loadbalancer' with value of type String
+auth-service-1       | 2026-01-18T23:10:38.717Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.c.e.PropertySourcesPropertyResolver  : Found key 'loadbalancer.client.name' in PropertySource 'loadbalancer' with value of type String
+auth-service-1       | 2026-01-18T23:10:38.717Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.c.e.PropertySourcesPropertyResolver  : Found key 'loadbalancer.client.name' in PropertySource 'loadbalancer' with value of type String
+auth-service-1       | 2026-01-18T23:10:38.717Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.c.e.PropertySourcesPropertyResolver  : Found key 'loadbalancer.client.name' in PropertySource 'loadbalancer' with value of type String
+auth-service-1       | 2026-01-18T23:10:38.717Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.c.e.PropertySourcesPropertyResolver  : Found key 'loadbalancer.client.name' in PropertySource 'loadbalancer' with value of type String
+auth-service-1       | 2026-01-18T23:10:38.718Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.c.e.PropertySourcesPropertyResolver  : Found key 'loadbalancer.client.name' in PropertySource 'loadbalancer' with value of type String
+auth-service-1       | 2026-01-18T23:10:38.718Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.c.e.PropertySourcesPropertyResolver  : Found key 'loadbalancer.client.name' in PropertySource 'loadbalancer' with value of type String
+auth-service-1       | 2026-01-18T23:10:38.751Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'propertySourcesPlaceholderConfigurer'
+auth-service-1       | 2026-01-18T23:10:38.751Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.context.event.internalEventListenerProcessor'
+auth-service-1       | 2026-01-18T23:10:38.751Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.context.event.internalEventListenerFactory'
+auth-service-1       | 2026-01-18T23:10:38.752Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'
+auth-service-1       | 2026-01-18T23:10:38.753Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor'
+auth-service-1       | 2026-01-18T23:10:38.753Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.context.annotation.internalPersistenceAnnotationProcessor'
+auth-service-1       | 2026-01-18T23:10:38.753Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'eurekaLoadBalancerClientConfiguration'
+auth-service-1       | 2026-01-18T23:10:38.754Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Autowiring by type from bean name 'eurekaLoadBalancerClientConfiguration' via constructor to bean named 'eurekaClientConfigBean'
+auth-service-1       | 2026-01-18T23:10:38.755Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Autowiring by type from bean name 'eurekaLoadBalancerClientConfiguration' via constructor to bean named 'eurekaInstanceConfigBean'
+auth-service-1       | 2026-01-18T23:10:38.755Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Autowiring by type from bean name 'eurekaLoadBalancerClientConfiguration' via constructor to bean named 'zoneConfig'
+auth-service-1       | 2026-01-18T23:10:38.755Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Autowiring by type from bean name 'eurekaLoadBalancerClientConfiguration' via constructor to bean named 'eurekaLoadBalancerProperties'
+auth-service-1       | 2026-01-18T23:10:38.756Z DEBUG 101 --- [auth-service] [io-8090-exec-10] .l.EurekaLoadBalancerClientConfiguration : Setting the value of 'spring.cloud.loadbalancer.zone' to defaultZone
+auth-service-1       | 2026-01-18T23:10:38.756Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'propertyPlaceholderAutoConfiguration'
+auth-service-1       | 2026-01-18T23:10:38.756Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'loadBalancerClientConfiguration'
+auth-service-1       | 2026-01-18T23:10:38.756Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'org.springframework.cloud.loadbalancer.annotation.LoadBalancerClientConfiguration$BlockingSupportConfiguration'
+auth-service-1       | 2026-01-18T23:10:38.757Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'discoveryClientServiceInstanceListSupplier'
+auth-service-1       | 2026-01-18T23:10:38.757Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Autowiring by type from bean name 'discoveryClientServiceInstanceListSupplier' via factory method to bean named 'org.springframework.context.annotation.AnnotationConfigApplicationContext@51fc6ce8'
+auth-service-1       | 2026-01-18T23:10:38.764Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.c.e.PropertySourcesPropertyResolver  : Found key 'loadbalancer.client.name' in PropertySource 'loadbalancer' with value of type String
+auth-service-1       | 2026-01-18T23:10:38.898Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Creating shared instance of singleton bean 'reactorServiceInstanceLoadBalancer'
+auth-service-1       | 2026-01-18T23:10:38.898Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Autowiring by type from bean name 'reactorServiceInstanceLoadBalancer' via factory method to bean named 'environment'
+auth-service-1       | 2026-01-18T23:10:38.898Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.b.f.s.DefaultListableBeanFactory     : Autowiring by type from bean name 'reactorServiceInstanceLoadBalancer' via factory method to bean named 'loadBalancerClientFactory'
+auth-service-1       | 2026-01-18T23:10:38.899Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.c.e.PropertySourcesPropertyResolver  : Found key 'loadbalancer.client.name' in PropertySource 'loadbalancer' with value of type String
+user-service-1       | 2026-01-18T23:10:39.794Z  INFO 84 --- [user-service] [nio-8091-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+user-service-1       | 2026-01-18T23:10:39.794Z  INFO 84 --- [user-service] [nio-8091-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+user-service-1       | 2026-01-18T23:10:39.795Z DEBUG 84 --- [user-service] [nio-8091-exec-1] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+user-service-1       | 2026-01-18T23:10:39.795Z DEBUG 84 --- [user-service] [nio-8091-exec-1] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+user-service-1       | 2026-01-18T23:10:39.795Z DEBUG 84 --- [user-service] [nio-8091-exec-1] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+user-service-1       | 2026-01-18T23:10:39.802Z DEBUG 84 --- [user-service] [nio-8091-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@28fcc1d
+user-service-1       | 2026-01-18T23:10:39.805Z DEBUG 84 --- [user-service] [nio-8091-exec-1] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@458b05af
+user-service-1       | 2026-01-18T23:10:39.808Z DEBUG 84 --- [user-service] [nio-8091-exec-1] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+user-service-1       | 2026-01-18T23:10:39.808Z  INFO 84 --- [user-service] [nio-8091-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 13 ms
+user-service-1       | 2026-01-18T23:10:39.857Z DEBUG 84 --- [user-service] [nio-8091-exec-1] o.s.security.web.FilterChainProxy        : Securing POST /api/users
+user-service-1       | 2026-01-18T23:10:40.251Z DEBUG 84 --- [user-service] [nio-8091-exec-1] o.s.s.o.s.r.a.JwtAuthenticationProvider  : Authenticated token
+user-service-1       | 2026-01-18T23:10:40.254Z DEBUG 84 --- [user-service] [nio-8091-exec-1] .s.r.w.a.BearerTokenAuthenticationFilter : Set SecurityContextHolder to JwtAuthenticationToken [Principal=org.springframework.security.oauth2.jwt.Jwt@438121f9, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=172.18.0.12, SessionId=null], Granted Authorities=[]]
+user-service-1       | 2026-01-18T23:10:40.282Z DEBUG 84 --- [user-service] [nio-8091-exec-1] o.s.security.web.FilterChainProxy        : Secured POST /api/users
+user-service-1       | 2026-01-18T23:10:40.289Z DEBUG 84 --- [user-service] [nio-8091-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/users", parameters={}
+user-service-1       | 2026-01-18T23:10:40.293Z DEBUG 84 --- [user-service] [nio-8091-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.example.userservice.web.UserController#createUser(UserCreateRequest)
+user-service-1       | 2026-01-18T23:10:40.362Z DEBUG 84 --- [user-service] [nio-8091-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [UserCreateRequest(username=string, email=string@asf.c, fullName=string)]
+user-service-1       | 2026-01-18T23:10:40.696Z DEBUG 84 --- [user-service] [nio-8091-exec-1] c.e.userservice.service.UserService      : createUser called: username=string, emailPresent=true
+user-service-1       | 2026-01-18T23:10:40.771Z DEBUG 84 --- [user-service] [nio-8091-exec-1] o.s.orm.jpa.JpaTransactionManager        : Creating new transaction with name [org.springframework.data.jpa.repository.support.SimpleJpaRepository.save]: PROPAGATION_REQUIRED,ISOLATION_DEFAULT
+user-service-1       | 2026-01-18T23:10:40.774Z DEBUG 84 --- [user-service] [nio-8091-exec-1] o.s.orm.jpa.JpaTransactionManager        : Opened new EntityManager [SessionImpl(1710117580<open>)] for JPA transaction
+user-service-1       | 2026-01-18T23:10:40.801Z DEBUG 84 --- [user-service] [nio-8091-exec-1] o.s.orm.jpa.JpaTransactionManager        : Exposing JPA transaction as JDBC [org.springframework.orm.jpa.vendor.HibernateJpaDialect$HibernateConnectionHandle@8ee254e]
+service-registry-1   | 2026-01-18T23:10:42.546Z  INFO 91 --- [service-registry] [a-EvictionTimer] c.n.e.registry.AbstractInstanceRegistry  : Running the evict task with compensationTime 2ms
+user-service-1       | 2026-01-18T23:10:42.704Z  WARN 84 --- [user-service] [nio-8091-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1364, SQLState: HY000
+auth-service-1       | 2026-01-18T23:10:42.753Z DEBUG 101 --- [auth-service] [nio-8090-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /actuator/health
+auth-service-1       | 2026-01-18T23:10:42.754Z DEBUG 101 --- [auth-service] [nio-8090-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+auth-service-1       | 2026-01-18T23:10:42.755Z DEBUG 101 --- [auth-service] [nio-8090-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /actuator/health
+user-service-1       | 2026-01-18T23:10:42.705Z ERROR 84 --- [user-service] [nio-8091-exec-1] o.h.engine.jdbc.spi.SqlExceptionHelper   : Field 'password' doesn't have a default value
+auth-service-1       | 2026-01-18T23:10:42.755Z DEBUG 101 --- [auth-service] [nio-8090-exec-2] o.s.web.servlet.DispatcherServlet        : GET "/actuator/health", parameters={}
+
+
+
+user-service-1       | 2026-01-18T23:10:42.867Z DEBUG 84 --- [user-service] [nio-8091-exec-1] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(1710117580<open>)]
+auth-service-1       | 2026-01-18T23:10:42.756Z DEBUG 101 --- [auth-service] [nio-8090-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Read "application/octet-stream" to []
+user-service-1       | 2026-01-18T23:10:42.883Z DEBUG 84 --- [user-service] [nio-8091-exec-1] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(1710117580<open>)] after transaction
+
+
+
+
+auth-service-1       | 2026-01-18T23:10:42.775Z DEBUG 101 --- [auth-service] [nio-8090-exec-2] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+
+
+user-service-1       | 2026-01-18T23:10:42.903Z DEBUG 84 --- [user-service] [nio-8091-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Using @ExceptionHandler com.example.userservice.web.UserExceptionHandler#handleGeneric(Exception, WebRequest)
+
+
+auth-service-1       | 2026-01-18T23:10:42.776Z DEBUG 101 --- [auth-service] [nio-8090-exec-2] o.s.jdbc.datasource.DataSourceUtils      : Fetching JDBC Connection from DataSource
+user-service-1       | 2026-01-18T23:10:42.951Z DEBUG 84 --- [user-service] [nio-8091-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/yaml]
+auth-service-1       | 2026-01-18T23:10:42.778Z DEBUG 101 --- [auth-service] [nio-8090-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [org.springframework.boot.actuate.health.SystemHealth@3a2f9148]500, error=Internal
+
+auth-service-1       | 2026-01-18T23:10:42.780Z DEBUG 101 --- [auth-service] [nio-8090-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+
+user-service-1       | 2026-01-18T23:10:42.984Z DEBUG 84 --- [user-service] [nio-8091-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 500 INTERNAL_SERVER_ERROR
+auth-service-1       | 2026-01-18T23:10:43.065Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.orm.jpa.JpaTransactionManager        : Initiating transaction rollback
+
+
+auth-service-1       | 2026-01-18T23:10:43.066Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.orm.jpa.JpaTransactionManager        : Rolling back JPA transaction on EntityManager [SessionImpl(1807668189<open>)]
+auth-service-1       | 2026-01-18T23:10:43.088Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.orm.jpa.JpaTransactionManager        : Closing JPA EntityManager [SessionImpl(1807668189<open>)] after transaction
+auth-service-1       | 2026-01-18T23:10:43.091Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.web.servlet.DispatcherServlet        : Failed to complete request: feign.FeignException$InternalServerError: [500] during [POST] to [http://user-service/api/users] [UserClient#createUser(UserCreateRequest)]: [{"timestamp":"2026-01-18T23:10:42.909002027Z","status":500,"error":"Internal error","message":"could not execute statement [Field 'password' doesn't have a default value] [insert into users (active,created_at,email,full_name,updated_at,username) values (?,?,?,?,?,?)]","path":"uri=/api/users","traceId":null}]
+auth-service-1       | 2026-01-18T23:10:43.094Z ERROR 101 --- [auth-service] [io-8090-exec-10] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: feign.FeignException$InternalServerError: [500] during [POST] to [http://user-service/api/users] [UserClient#createUser(UserCreateRequest)]: [{"timestamp":"2026-01-18T23:10:42.909002027Z","status":500,"error":"Internal error","message":"could not execute statement [Field 'password' doesn't have a default value] [insert into users (active,created_at,email,full_name,updated_at,username) values (?,?,?,?,?,?)]","path":"uri=/api/users","traceId":null}]] with root cause
+auth-service-1       | 
+auth-service-1       | feign.FeignException$InternalServerError: [500] during [POST] to [http://user-service/api/users] [UserClient#createUser(UserCreateRequest)]: [{"timestamp":"2026-01-18T23:10:42.909002027Z","status":500,"error":"Internal error","message":"could not execute statement [Field 'password' doesn't have a default value] [insert into users (active,created_at,email,full_name,updated_at,username) values (?,?,?,?,?,?)]","path":"uri=/api/users","traceId":null}]
+auth-service-1       |  at feign.FeignException.serverErrorStatus(FeignException.java:281) ~[feign-core-13.6.jar:na]
+api-gateway-1        | 2026-01-18T23:10:43.227Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] r.n.http.client.HttpClientOperations     : [e87f9c89-1, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090] Received response (auto-read:false) : RESPONSE(decodeResult: success, version: HTTP/1.1)
+api-gateway-1        | HTTP/1.1 500 
+v View in Docker Desktop   o View Config   w Enable Watch
+
+api-gateway-1        | Vary: <filtered>
+auth-service-1       |  at feign.FeignException.errorStatus(FeignException.java:226) ~[feign-core-13.6.jar:na]
+auth-service-1       |  at feign.FeignException.errorStatus(FeignException.java:213) ~[feign-core-13.6.jar:na]
+api-gateway-1        | Vary: <filtered>
+
+
+auth-service-1       | pat feign.codec.ErrorDecoder$Default.decode(ErrorDecoder.java:103) ~[feign-core-13.6.jar:na]
+api-gateway-1        | X-Content-Type-Options: <filtered>
+
+
+
+
+auth-service-1       |  at feign.InvocationContext.decodeError(InvocationContext.java:133) ~[feign-core-13.6.jar:na]
+api-gateway-1        | X-XSS-Protection: <filtered>
+api-gateway-1        | Cache-Control: <filtered>
+api-gateway-1        | Pragma: <filtered>
+api-gateway-1        | Expires: <filtered>
+api-gateway-1        | X-Frame-Options: <filtered>
+api-gateway-1        | Content-Type: <filtered>
+api-gateway-1        | Transfer-Encoding: <filtered>
+api-gateway-1        | Date: <filtered>
+
+
+api-gateway-1        | Connection: <filtered>
+
+
+auth-service-1       |  at feign.InvocationContext.proceed(InvocationContext.java:80) ~[feign-core-13.6.jar:na]
+auth-service-1       |  at feign.ResponseHandler.handleResponse(ResponseHandler.java:69) ~[feign-core-13.6.jar:na]
+auth-service-1       |  at feign.SynchronousMethodHandler.executeAndDecode(SynchronousMethodHandler.java:109) ~[feign-core-13.6.jar:na]
+api-gateway-1        | 2026-01-18T23:10:43.227Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] r.n.r.DefaultPooledConnectionProvider    : [e87f9c89-1, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090] onStateChange(POST{uri=/api/auth/register, connection=PooledConnection{channel=[id: 0xe87f9c89, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090]}}, [response_received])
+
+
+auth-service-1       |  at feign.SynchronousMethodHandler.invoke(SynchronousMethodHandler.java:53) ~[feign-core-13.6.jar:na]
+
+
+api-gateway-1        | 2026-01-18T23:10:43.228Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] .f.h.o.ObservedResponseHttpHeadersFilter : Will instrument the response
+
+auth-service-1       |  at feign.ReflectiveFeign$FeignInvocationHandler.invoke(ReflectiveFeign.java:104) ~[feign-core-13.6.jar:na]
+api-gateway-1        | 2026-01-18T23:10:43.229Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] .f.h.o.ObservedResponseHttpHeadersFilter : The response was handled for observation {name=http.client.requests(null), error=null, context=name='http.client.requests', contextualName='null', error='null', lowCardinalityKeyValues=[http.method='POST', http.status_code='UNKNOWN', spring.cloud.gateway.route.id='auth-service', spring.cloud.gateway.route.uri='lb://auth-service'], highCardinalityKeyValues=[http.uri='http://localhost:8080/api/auth/register'], map=[class io.micrometer.core.instrument.Timer$Sample='io.micrometer.core.instrument.Timer$Sample@78fb51d6', class io.micrometer.core.instrument.LongTaskTimer$Sample='SampleImpl{duration(seconds)=6.284454559, duration(nanos)=6.284454559E9, startTimeNanos=106437788626826}'], parentObservation=org.springframework.security.web.server.ObservationWebFilterChainDecorator$PhasedObservation@7cc4ca11}
+
+
+api-gateway-1        | 2026-01-18T23:10:43.233Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] reactor.netty.channel.FluxReceive        : [e87f9c89-1, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090] [terminated=false, cancelled=false, pending=0, error=null]: subscribing inbound receiver
+auth-service-1       |  at jdk.proxy3/jdk.proxy3.$Proxy189.createUser(Unknown Source) ~[na:na]
+api-gateway-1        | 2026-01-18T23:10:43.236Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] r.n.http.client.HttpClientOperations     : [e87f9c89-1, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090] Received last HTTP packet
+
+api-gateway-1        | 2026-01-18T23:10:43.236Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] r.n.r.DefaultPooledConnectionProvider    : [e87f9c89, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090] onStateChange(POST{uri=/api/auth/register, connection=PooledConnection{channel=[id: 0xe87f9c89, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090]}}, [response_completed])
+
+
+
+
+api-gateway-1        | 2026-01-18T23:10:43.236Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] r.n.r.DefaultPooledConnectionProvider    : [e87f9c89, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090] onStateChange(POST{uri=/api/auth/register, connection=PooledConnection{channel=[id: 0xe87f9c89, L:/172.18.0.11:43208 - R:172.18.0.12/172.18.0.12:8090]}}, [disconnecting])
+auth-service-1       |  at com.example.authservice.auth.AuthService.register(AuthService.java:71) ~[classes/:na]
+api-gateway-1        | 2026-01-18T23:10:43.236Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] c.example.gateway.config.GatewayConfig   : Publishing audit event traceId=8b8293cb-d7b9-4473-bbfa-cc180e486a32, method=POST, path=/auth/api/auth/register, status=500
+auth-service-1       |  at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+
+
+
+api-gateway-1        | 2026-01-18T23:10:43.236Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] c.e.gateway.publisher.AuditPublisher     : Preparing audit event traceId=8b8293cb-d7b9-4473-bbfa-cc180e486a32, method=POST, path=/auth/api/auth/register, status=500 INTERNAL_SERVER_ERROR
+auth-service-1       |  at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+
+
+api-gateway-1        | 2026-01-18T23:10:43.237Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] r.n.resources.PooledConnectionProvider   : [e87f9c89, L:/172.18.0.11:43208 ! R:172.18.0.12/172.18.0.12:8090] Channel closed, now: 0 active connections, 0 inactive connections 0 pending acquire requests.
+api-gateway-1        | 2026-01-18T23:10:43.238Z DEBUG 86 --- [api-gateway] [r-http-epoll-11] r.n.r.DefaultPooledConnectionProvider    : [e87f9c89, L:/172.18.0.11:43208 ! R:172.18.0.12/172.18.0.12:8090] onStateChange(PooledConnection{channel=[id: 0xe87f9c89, L:/172.18.0.11:43208 ! R:172.18.0.12/172.18.0.12:8090]}, [disconnecting])
+
+
+auth-service-1       |  at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:360) ~[spring-aop-6.2.12.jar:6.2.12]
+api-gateway-1        | 2026-01-18T23:10:43.238Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] c.f.c.c.BeanFactoryAwareFunctionRegistry : Invoking function streamBridge<class java.lang.Object, class java.lang.Object>
+
+auth-service-1       |  at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196) ~[spring-aop-6.2.12.jar:6.2.12]
+
+
+api-gateway-1        | 2026-01-18T23:10:43.239Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] c.f.c.c.BeanFactoryAwareFunctionRegistry : Invoking function streamBridge<class java.lang.Object, class java.lang.Object>
+auth-service-1       |  at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-6.2.12.jar:6.2.12]
+
+
+api-gateway-1        | 2026-01-18T23:10:43.239Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] c.f.c.c.BeanFactoryAwareFunctionRegistry : Invoking function: streamBridge<class java.lang.Object, class java.lang.Object>with input type: class java.lang.Object
+auth-service-1       |  at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380) ~[spring-tx-6.2.12.jar:6.2.12]
+
+
+api-gateway-1        | 2026-01-18T23:10:43.240Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] .f.c.CloudEventsFunctionInvocationHelper : Cloud event attributes will be prefixed with 'ce_'
+auth-service-1       |  at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-6.2.12.jar:6.2.12]
+api-gateway-1        | 2026-01-18T23:10:43.240Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] o.s.integration.channel.ExecutorChannel  : preSend on channel 'org.springframework.integration.channel.ExecutorChannel@3b16f874', message: MutableMessage [payload=byte[368], headers={id=e2fa4495-9e9b-f07b-e96e-de9d48356e46, contentType=application/json, target-protocol=kafka, timestamp=1768777843239}]
+api-gateway-1        | 2026-01-18T23:10:43.242Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] o.s.integration.channel.ExecutorChannel  : postSend (sent=true) on channel 'org.springframework.integration.channel.ExecutorChannel@3b16f874', message: MutableMessage [payload=byte[368], headers={id=e2fa4495-9e9b-f07b-e96e-de9d48356e46, contentType=application/json, target-protocol=kafka, timestamp=1768777843239}]
+auth-service-1       |  at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184) ~[spring-aop-6.2.12.jar:6.2.12]
+
+
+
+
+auth-service-1       |  at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:728) ~[spring-aop-6.2.12.jar:6.2.12]
+api-gateway-1        | 2026-01-18T23:10:43.242Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] c.e.gateway.publisher.AuditPublisher     : Audit event sent to binding audit-out-0 traceId=8b8293cb-d7b9-4473-bbfa-cc180e486a32 status=500 INTERNAL_SERVER_ERROR
+api-gateway-1        | 2026-01-18T23:10:43.243Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] o.s.w.s.adapter.HttpWebHandlerAdapter    : [30f89dd1-10] Completed 500 INTERNAL_SERVER_ERROR
+
+auth-service-1       |  at com.example.authservice.auth.AuthService$$SpringCGLIB$$0.register(<generated>) ~[classes/:na]
+
+
+
+
+api-gateway-1        | 2026-01-18T23:10:43.243Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] r.n.http.server.HttpServerOperations     : [30f89dd1-1, L:/172.18.0.11:8080 - R:/172.18.0.1:57786] Last HTTP response frame
+
+
+auth-service-1       |  at com.example.authservice.auth.AuthController.register(AuthController.java:28) ~[classes/:na]
+api-gateway-1        | 2026-01-18T23:10:43.243Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] r.n.http.server.HttpServerOperations     : [30f89dd1-1, L:/172.18.0.11:8080 - R:/172.18.0.1:57786] Decreasing pending responses count: 0
+auth-service-1       |  at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+
+api-gateway-1        | 2026-01-18T23:10:43.244Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] r.n.http.server.HttpServerOperations     : [30f89dd1-1, L:/172.18.0.11:8080 - R:/172.18.0.1:57786] Last HTTP packet was sent, terminating the channel
+
+
+api-gateway-1        | 2026-01-18T23:10:43.244Z DEBUG 86 --- [api-gateway] [r-http-epoll-10] r.netty.channel.ChannelOperations        : [30f89dd1-1, L:/172.18.0.11:8080 - R:/172.18.0.1:57786] [HttpServer] Channel inbound receive
+auth-service-1       | oat org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.12.jar:6.2.12]
+api-gateway-1        | 2026-01-18T23:10:43.244Z DEBUG 86 --- [api-gateway] [pool-4-thread-7] tractMessageChannelBinder$SendingHandler : org.springframework.cloud.stream.binder.AbstractMessageChannelBinder$SendingHandler@3b5e6811 received message: MutableMessage [payload=byte[368], headers={id=e2fa4495-9e9b-f07b-e96e-de9d48356e46, contentType=application/json, target-protocol=kafka, timestamp=1768777843239}]
+
+
+auth-service-1       |  at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.12.jar:6.2.12]
+
+api-gateway-1        | 2026-01-18T23:10:43.244Z DEBUG 86 --- [api-gateway] [pool-4-thread-7] nder$ProducerConfigurationMessageHandler : org.springframework.cloud.stream.binder.kafka.KafkaMessageChannelBinder$ProducerConfigurationMessageHandler@43939e70 received message: GenericMessage [payload=byte[368], headers={id=2af48103-e4a1-9fff-9a42-e95ad44bc46c, contentType=application/json, target-protocol=kafka, timestamp=1768777843244}]
+
+
+api-gateway-1        | 2026-01-18T23:10:43.245Z DEBUG 86 --- [api-gateway] [pool-4-thread-7] erMapper$SimplePatternBasedHeaderMatcher : headerName=[id] WILL NOT be mapped, matched pattern=!id
+auth-service-1       |  at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.12.jar:6.2.12]
+
+
+api-gateway-1        | 2026-01-18T23:10:43.245Z DEBUG 86 --- [api-gateway] [pool-4-thread-7] erMapper$SimplePatternBasedHeaderMatcher : headerName=[contentType] WILL be mapped, matched pattern=*
+
+
+
+
+auth-service-1       |  at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.12.jar:6.2.12]
+
+api-gateway-1        | 2026-01-18T23:10:43.245Z DEBUG 86 --- [api-gateway] [pool-4-thread-7] erMapper$SimplePatternBasedHeaderMatcher : headerName=[target-protocol] WILL be mapped, matched pattern=*
+
+auth-service-1       |  at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.12.jar:6.2.12]
+
+
+api-gateway-1        | 2026-01-18T23:10:43.245Z DEBUG 86 --- [api-gateway] [pool-4-thread-7] erMapper$SimplePatternBasedHeaderMatcher : headerName=[timestamp] WILL NOT be mapped, matched pattern=!timestamp
+auth-service-1       |  at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.12.jar:6.2.12]
+
+
+api-gateway-1        | 2026-01-18T23:10:43.246Z DEBUG 86 --- [api-gateway] [pool-4-thread-7] nder$ProducerConfigurationMessageHandler : handler 'org.springframework.cloud.stream.binder.kafka.KafkaMessageChannelBinder$ProducerConfigurationMessageHandler@43939e70' produced no reply for request Message: GenericMessage [payload=byte[368], headers={id=2af48103-e4a1-9fff-9a42-e95ad44bc46c, contentType=application/json, target-protocol=kafka, timestamp=1768777843244}]
+auth-service-1       |  at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.2.12.jar:6.2.12]
+auth-service-1       |  at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.48.jar:6.0]
+auth-service-1       |  at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.12.jar:6.2.12]
+auth-service-1       |  at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.48.jar:6.0]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:490) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:351) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:83) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:129) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:125) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:119) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.6.jar:6.5.6]
+
+
+qr-service-1         | 2026-01-18T23:10:44.264Z DEBUG 87 --- [qr-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : HTTP PUT http://service-registry:8761/eureka/apps/QR-SERVICE/861710d425bf:qr-service:8093?status=UP&lastDirtyTimestamp=1768777634240
+
+
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.6.jar:6.5.6]
+qr-service-1         | 2026-01-18T23:10:44.265Z DEBUG 87 --- [qr-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.6.jar:6.5.6]
+
+auth-service-1       | 2at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.5.6.jar:6.5.6]
+
+
+qr-service-1         | 2026-01-18T23:10:44.267Z DEBUG 87 --- [qr-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.6.jar:6.5.6]
+qr-service-1         | 2026-01-18T23:10:44.272Z DEBUG 87 --- [qr-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
+
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.6.jar:6.5.6]
+
+
+
+
+qr-service-1         | 2026-01-18T23:10:44.274Z DEBUG 87 --- [qr-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+auth-service-1       |  at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.5.6.jar:6.5.6]
+qr-service-1         | 2026-01-18T23:10:44.274Z DEBUG 87 --- [qr-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
+
+
+
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at com.example.authservice.security.jwt.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:50) ~[classes/:na]
+auth-service-1       |  at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:228) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:241) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:334) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:225) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:138) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.web.filter.ServletRequestPathFilter.doFilter(ServletRequestPathFilter.java:52) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebSecurityConfiguration.java:319) ~[spring-security-config-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$4(HandlerMappingIntrospector.java:267) ~[spring-webmvc-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:240) ~[spring-security-config-6.5.6.jar:6.5.6]
+auth-service-1       |  at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:110) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.springframework.web.filter.ForwardedHeaderFilter.doFilterInternal(ForwardedHeaderFilter.java:173) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.12.jar:6.2.12]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:138) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:88) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:113) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:83) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:72) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:342) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1774) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:973) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:491) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.48.jar:10.1.48]
+auth-service-1       |  at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+auth-service-1       | 
+auth-service-1       | 2026-01-18T23:10:43.203Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.security.web.FilterChainProxy        : Securing POST /error
+auth-service-1       | 2026-01-18T23:10:43.207Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.security.web.FilterChainProxy        : Secured POST /error
+auth-service-1       | 2026-01-18T23:10:43.207Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for POST "/auth/error", parameters={}
+auth-service-1       | 2026-01-18T23:10:43.208Z DEBUG 101 --- [auth-service] [io-8090-exec-10] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+auth-service-1       | 2026-01-18T23:10:43.219Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/yaml]
+auth-service-1       | 2026-01-18T23:10:43.220Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Sun Jan 18 23:10:43 UTC 2026, status=500, error=Internal Server Error, trace=feign.FeignE (truncated)...]
+auth-service-1       | 2026-01-18T23:10:43.230Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 500
+auth-service-1       | 2026-01-18T23:10:43.230Z DEBUG 101 --- [auth-service] [io-8090-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+auth-service-1       | 2026-01-18T23:10:43.515Z DEBUG 101 --- [auth-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : HTTP PUT http://service-registry:8761/eureka/apps/AUTH-SERVICE/a5c849d4c983:auth-service:8090?status=UP&lastDirtyTimestamp=1768777633480
+auth-service-1       | 2026-01-18T23:10:43.516Z DEBUG 101 --- [auth-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
+auth-service-1       | 2026-01-18T23:10:43.525Z DEBUG 101 --- [auth-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : HTTP GET http://service-registry:8761/eureka/apps/delta
+auth-service-1       | 2026-01-18T23:10:43.526Z DEBUG 101 --- [auth-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
+auth-service-1       | 2026-01-18T23:10:43.528Z DEBUG 101 --- [auth-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
+auth-service-1       | 2026-01-18T23:10:43.532Z DEBUG 101 --- [auth-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
+auth-service-1       | 2026-01-18T23:10:43.532Z DEBUG 101 --- [auth-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]
+inventory-service-1  | 2026-01-18T23:10:45.851Z DEBUG 86 --- [inventory-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : HTTP PUT http://service-registry:8761/eureka/apps/INVENTORY-SERVICE/4bd91bad41da:inventory-service:8092?status=UP&lastDirtyTimestamp=1768777665857
+inventory-service-1  | 2026-01-18T23:10:45.852Z DEBUG 86 --- [inventory-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : HTTP GET http://service-registry:8761/eureka/apps/delta
+inventory-service-1  | 2026-01-18T23:10:45.853Z DEBUG 86 --- [inventory-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
+inventory-service-1  | 2026-01-18T23:10:45.853Z DEBUG 86 --- [inventory-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : Accept=[application/json, application/yaml, application/*+json]
+inventory-service-1  | 2026-01-18T23:10:45.858Z DEBUG 86 --- [inventory-service] [beatExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
+inventory-service-1  | 2026-01-18T23:10:45.858Z DEBUG 86 --- [inventory-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Response 200 OK
+inventory-service-1  | 2026-01-18T23:10:45.859Z DEBUG 86 --- [inventory-service] [reshExecutor-%d] o.s.web.client.RestTemplate              : Reading to [org.springframework.cloud.netflix.eureka.http.EurekaApplications]

@@ -5,21 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a08b3a7a-feaa-49bf-84bd-38c879f4758f" name="Changes" comment="fix">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/AuthServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/AuthServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/dto/AuthRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/dto/AuthRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/dto/AuthResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/dto/AuthResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/dto/RefreshTokenRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/dto/RefreshTokenRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/auth/dto/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/dto/RegisterRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-lib/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-lib/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-lib/src/main/java/com/example/common/error/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-lib/src/main/java/com/example/common/error/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/api-gateway-docker.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config-repo/user-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/user-service.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/client/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/client/UserClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/dto/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/dto/RegisterRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/example/authservice/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config-repo/api-gateway.yml" beforeDir="false" afterPath="$PROJECT_DIR$/config-repo/api-gateway.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log.log" beforeDir="false" afterPath="$PROJECT_DIR$/log.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/qr-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/qr-service/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,13 +96,6 @@
       <recent name="C:\OneDrive\Project\SIRMS\library-management-be\security-lib\src\main\java\com\example\commonlib\security\autoconfigure" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="configurationTypes">
-      <set>
-        <option value="SpringBootApplicationConfigurationType" />
-      </set>
-    </option>
-  </component>
   <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
@@ -175,6 +163,7 @@
       <workItem from="1767962241373" duration="205000" />
       <workItem from="1767962487412" duration="22608000" />
       <workItem from="1768514181020" duration="5183000" />
+      <workItem from="1768603705044" duration="20037000" />
     </task>
     <task id="LOCAL-00001" summary="fix">
       <option name="closed" value="true" />

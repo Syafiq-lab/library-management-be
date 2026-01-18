@@ -4,6 +4,7 @@ import com.example.authservice.client.UserClient;
 import com.example.authservice.dto.AuthRequest;
 import com.example.authservice.dto.AuthResponse;
 import com.example.authservice.dto.RegisterRequest;
+import com.example.authservice.dto.UserCreateRequest;
 import com.example.authservice.security.jwt.JwtService;
 import com.example.authservice.token.RefreshToken;
 import com.example.authservice.token.RefreshTokenRepository;
@@ -11,9 +12,11 @@ import com.example.authservice.user.Role;
 import com.example.authservice.user.User;
 import com.example.authservice.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,8 +26,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.AuthenticationException;
 
 @Service
 @RequiredArgsConstructor
@@ -40,46 +41,70 @@ public class AuthService {
 
     @Transactional
     public AuthResponse register(RegisterRequest request) {
-        log.debug("Register attempt via user-service: email={}", request.getEmail());
-        
-        // 1. Delegate user creation to the owner of the data
-        userClient.createUser(request);
+        String email = request.getEmail().toLowerCase(Locale.ROOT).trim();
+        String username = request.getUsername().trim();
+        String fullName = request.getFullName().trim();
 
-        // 2. Fetch the newly created user to generate tokens
-        // (Alternatively, have UserClient return the user object)
-        User user = userRepository.findByEmail(request.getEmail().toLowerCase(Locale.ROOT))
-                .orElseThrow(() -> new RuntimeException("User creation failed or sync delay"));
+        log.debug("Register attempt: email={} username={}", email, username);
 
-        log.info("User registered via delegation email={} id={}", user.getEmail(), user.getId());
+        // 1) Create auth user (credentials live in auth-service)
+        userRepository.findByEmail(email).ifPresent(u -> {
+            throw new IllegalArgumentException("Email already registered");
+        });
 
+        User user = new User();
+        user.setEmail(email);
+        user.setUsername(email);
+        user.setFullName(fullName);
+        user.setPassword(passwordEncoder.encode(request.getPassword())); // store HASH
+        user.setRole(Role.USER); // adjust if your enum differs
+        user.setActive(true);
+
+        // If your User entity has username/fullName fields, keep these:
+        // user.setUsername(username);
+        // user.setFullName(fullName);
+
+        user = userRepository.save(user);
+
+        // 2) Create profile in user-service (NO password)
+        UserCreateRequest profileReq = new UserCreateRequest(username, email, fullName);
+        userClient.createUser(profileReq);
+
+        log.info("User registered: email={} authUserId={}", email, user.getId());
+
+        // 3) Tokens
         UserDetails userDetails = buildUserDetails(user);
         String accessToken = jwtService.generateAccessToken(userDetails);
         String refreshToken = createAndStoreRefreshToken(user);
 
         return new AuthResponse(accessToken, refreshToken);
     }
+
     public AuthResponse authenticate(AuthRequest request) {
         Authentication authentication;
-try {
-    log.debug("Authentication attempt email={}", request.getEmail());
-    authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(
-                    request.getEmail(),
-                    request.getPassword()
-            )
-    );
-} catch (AuthenticationException ex) {
-    log.warn("Authentication failed email={} reason={}", request.getEmail(), ex.getMessage());
-    throw ex;
-}
-if (!authentication.isAuthenticated()) {
+        try {
+            log.debug("Authentication attempt email={}", request.getEmail());
+            authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getEmail(),
+                            request.getPassword()
+                    )
+            );
+        } catch (AuthenticationException ex) {
+            log.warn("Authentication failed email={} reason={}", request.getEmail(), ex.getMessage());
+            throw ex;
+        }
+
+        if (!authentication.isAuthenticated()) {
             log.warn("Authentication rejected: invalid credentials email={}", request.getEmail());
             throw new IllegalArgumentException("Invalid credentials");
         }
 
-        User user = userRepository.findByEmail(request.getEmail())
+        User user = userRepository.findByEmail(request.getEmail().toLowerCase(Locale.ROOT))
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        log.info("Authentication success email={} userId={} role={}", user.getEmail(), user.getId(), user.getRole());
+
+        log.info("Authentication success email={} userId={} role={}",
+                user.getEmail(), user.getId(), user.getRole());
 
         UserDetails userDetails = buildUserDetails(user);
         String accessToken = jwtService.generateAccessToken(userDetails);
@@ -90,7 +115,10 @@ if (!authentication.isAuthenticated()) {
 
     @Transactional
     public AuthResponse refresh(String refreshTokenValue) {
-        log.debug("Refresh attempt tokenPresent={} tokenLength={}", refreshTokenValue != null, refreshTokenValue == null ? 0 : refreshTokenValue.length());
+        log.debug("Refresh attempt tokenPresent={} tokenLength={}",
+                refreshTokenValue != null,
+                refreshTokenValue == null ? 0 : refreshTokenValue.length());
+
         if (!jwtService.isRefreshToken(refreshTokenValue)) {
             log.warn("Refresh rejected: not a refresh token");
             throw new IllegalArgumentException("Invalid token type");
@@ -104,7 +132,8 @@ if (!authentication.isAuthenticated()) {
                 });
 
         if (refreshToken.getExpiryDate().isBefore(Instant.now())) {
-            log.warn("Refresh rejected: token expired userId={}", refreshToken.getUser() == null ? null : refreshToken.getUser().getId());
+            log.warn("Refresh rejected: token expired userId={}",
+                    refreshToken.getUser() == null ? null : refreshToken.getUser().getId());
             throw new IllegalArgumentException("Refresh token expired");
         }
 
@@ -123,11 +152,15 @@ if (!authentication.isAuthenticated()) {
 
     @Transactional
     public void logout(String refreshTokenValue) {
-        log.debug("Logout attempt tokenPresent={} tokenLength={}", refreshTokenValue != null, refreshTokenValue == null ? 0 : refreshTokenValue.length());
+        log.debug("Logout attempt tokenPresent={} tokenLength={}",
+                refreshTokenValue != null,
+                refreshTokenValue == null ? 0 : refreshTokenValue.length());
+
         refreshTokenRepository.findByTokenAndRevokedFalse(refreshTokenValue)
                 .ifPresent(token -> {
                     token.setRevoked(true);
-                    log.info("Logout success: refresh token revoked userId={}", token.getUser() == null ? null : token.getUser().getId());
+                    log.info("Logout success: refresh token revoked userId={}",
+                            token.getUser() == null ? null : token.getUser().getId());
                     refreshTokenRepository.save(token);
                 });
     }
@@ -154,7 +187,7 @@ if (!authentication.isAuthenticated()) {
     private UserDetails buildUserDetails(User user) {
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getEmail())
-                .password(user.getPassword())
+                .password(user.getPassword())         // hashed password in DB
                 .disabled(!user.isActive())
                 .authorities("ROLE_" + user.getRole().name())
                 .build();
